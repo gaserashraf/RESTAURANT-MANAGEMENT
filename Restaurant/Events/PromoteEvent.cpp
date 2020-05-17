@@ -12,7 +12,7 @@ void PromoteEvent::Execute(Restaurant* pRest)
 	//2-Remove from Normal
 	//pRest->addOrderToVip(pRest->deleteOrderId(OrderID)->getItem());
 	Order* ord = pRest->deleteOrderId(OrderID)->getItem();
-	if (ord)
+	if (ord&&ord->getStatus()==WAIT)
 	{
 		ord->SetMoney(ord->GetMoney() + Ex);
 		ord->SetType(TYPE_VIP);

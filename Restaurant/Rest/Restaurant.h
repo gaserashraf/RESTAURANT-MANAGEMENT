@@ -38,6 +38,18 @@ private:
 	Cook* pVeganCook;
 	Cook* pVIPCook;
 
+	//gaser
+	LinkedList<Cook*>pAvliableNormalCook;
+	LinkedList<Cook*>pAvliableVeganCook;
+	LinkedList<Cook*>pAvliableVIPCook;
+
+	LinkedList<Cook*>pBusyNormalCook;
+	LinkedList<Cook*>pBusyVeganCook;
+	LinkedList<Cook*>pBusyVIPCook;
+
+
+	//gaser
+
 
 	int CooksNum[3]; //25/3
 	int CooksSpd[3]; //25/3
@@ -68,6 +80,35 @@ public:
 	void addOrderToNrm(Order* O);
 	void addOrderToVip(Order* O);
 	void addOrderToVgn(Order* O);
+
+
+
+	//gaser
+	bool isAvliableNormalCooks();
+	bool isAvliableVeganCooks();
+	bool isAvliableVIPCooks();
+
+	void addToAvNorCook(Cook* c);
+	void addToAvVaCook(Cook* c);
+	void addToAvVIPCook(Cook* c);
+	void addToBuNorCook(Cook* c);
+	void addToBuVaCook(Cook* c);
+	void addToVuVIPCook(Cook* c);
+
+	Node<Cook*>*RemoveAndGetCookByIdFromANC(int id);
+	Node<Cook*>*RemoveAndGetCookByIdFromAGC(int id);
+	Node<Cook*>*RemoveAndGetCookByIdFromAVC(int id);
+	Node<Cook*>*RemoveAndGetCookByIdFromBNC(int id);
+	Node<Cook*>*RemoveAndGetCookByIdFromBGC(int id);
+	Node<Cook*>*RemoveAndGetCookByIdFromBVC(int id);
+
+
+	void CheckIfCooksTakeBreak();
+
+	//start modes
+	void StepByStepMode();
+
+	//end modes
 
 
 /// ===================    DEMO-related functions. Should be removed in phases 1&2   ================= 

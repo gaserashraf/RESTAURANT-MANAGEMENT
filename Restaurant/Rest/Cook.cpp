@@ -58,4 +58,34 @@ void Cook::setType(ORD_TYPE t)
 	type = t;
 }
 
+void Cook::setServingOrder(int s)
+{
+	servingOrder = s;
+}
+
+void Cook::setTimeInBusyList(int t)
+{
+	timeInBusyList = t;
+}
+
+void Cook::setOrderThatWorkedAt(Order* o)
+{
+	orderThatWorkedAt = o;
+}
+
+int Cook::getServingOrder() const
+{
+	return servingOrder;
+}
+
+int Cook::getTimeInBusyList() const
+{
+	return timeInBusyList;
+}
+
+Order* Cook::getOrderThatWorkedAt() const
+{
+	return orderThatWorkedAt;
+}
+
 

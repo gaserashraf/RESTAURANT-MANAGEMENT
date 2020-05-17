@@ -260,6 +260,7 @@ public:
 
 	}
 	Node<Order*>* DeleteNodeId(int id);
+	Node<Cook*>* RemoveCookFromListWithOutDelete(int id);
 };
 
 template<>
@@ -290,6 +291,33 @@ inline Node<Order*>* LinkedList<Order*>::DeleteNodeId(int id)
 	else
 	{
 		Node<Order*>* prev = Head, * temp = Head->getNext();
+		while (temp)
+		{
+			if (temp->getItem()->GetID() == id)
+				break;
+			prev = temp;
+			temp = temp->getNext();
+		}
+		if (temp)
+		{
+			prev->setNext(temp->getNext());
+			//delete temp;
+			return temp;
+		}
+	}
+	return NULL;
+}
+template<>
+inline Node<Cook*>* LinkedList<Cook*>::RemoveCookFromListWithOutDelete(int id)
+{
+	if (id == Head->getItem()->GetID())
+		return Deletefirst();
+	else if (id == tail->getItem()->GetID())
+		return Deletelast();
+
+	else
+	{
+		Node<Cook*>* prev = Head, * temp = Head->getNext();
 		while (temp)
 		{
 			if (temp->getItem()->GetID() == id)
