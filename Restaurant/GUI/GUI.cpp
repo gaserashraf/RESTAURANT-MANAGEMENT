@@ -67,6 +67,18 @@ void GUI::PrintMessage(string msg) const	//Prints a message on status bar
 	pWind->DrawString(10, WindHeight - (int) (StatusBarHeight/1.5), msg); // You may need to change these coordinates later 
 	                                                                      // to be able to write multi-line
 }
+void GUI::PrintMessage(string* msg, int numOfStrings) const //gaser
+{
+	ClearStatusBar();	//First clear the status bar
+	for (size_t i = 0; i < numOfStrings; i++)
+	{
+		pWind->SetPen(DARKRED);
+		pWind->SetFont(18, BOLD, BY_NAME, "Arial");
+		pWind->DrawString(10, WindHeight - (int)((StatusBarHeight) / (1.5)+30-(i)*17), msg[i]); // You may need to change these coordinates later 
+																			  // to be able to write multi-line
+	}
+	
+}
 //////////////////////////////////////////////////////////////////////////////////////////
 void GUI::DrawString(const int iX, const int iY, const string Text)
 {

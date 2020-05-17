@@ -115,6 +115,8 @@ public:
 	// Output Functions  ---------------------------
 	void PrintMessage(string msg) const; // prints a message in the status bar
 
+	void PrintMessage(string *msg,int numOfStrings) const; // gaser - i added new function to pring a multiple lines You should update this function to print multiple lines at the bottom of the interface window.
+	//max massage 6 endl line
 
 	void UpdateInterface();
 	void AddToDrawingList(Order* pOrd);	//Adds a new order to the drawing queue

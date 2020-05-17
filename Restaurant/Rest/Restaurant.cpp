@@ -17,7 +17,6 @@ void Restaurant::RunSimulation()
 {
 	pGUI = new GUI;
 	PROG_MODE mode = pGUI->getGUIMode();
-
 	switch (mode)	//Add a function for each mode in next phases
 	{
 	case MODE_INTR:
@@ -35,7 +34,7 @@ void Restaurant::RunSimulation()
 	//Just_A_Demo();
 
 	};
-
+	
 }
 
 
