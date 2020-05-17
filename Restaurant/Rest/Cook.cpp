@@ -88,4 +88,12 @@ Order* Cook::getOrderThatWorkedAt() const
 	return orderThatWorkedAt;
 }
 
+void Cook::setRest(int r)
+{
+	Rest = r;
+}
 
+void Cook::setInjuryProbability(int i)
+{
+	injuryProbability = i;
+}

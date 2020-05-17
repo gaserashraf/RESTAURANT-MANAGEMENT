@@ -16,6 +16,10 @@ class Cook
 	int timeInBusyList; // if the cook in busy list it will be incresed until to be = to BKT and back to the avaliable list
 	Order* orderThatWorkedAt;
 	int TimeFinshOrder; //== ceil(Size/speed)
+
+	//Gamal 18/5
+	 static int Rest; // implemented as static as all cooks have the same rest period
+	 static int injuryProbability;	// probability of getting injured FOR BUSY COOKS ONLY
 public:
 	Cook();
 	void setSpeed(int s);
@@ -37,4 +41,7 @@ public:
 	int getServingOrder() const;
 	int getTimeInBusyList() const;
 	Order* getOrderThatWorkedAt() const;
+
+	void setRest(int r);
+	void setInjuryProbability(int i);
 };
