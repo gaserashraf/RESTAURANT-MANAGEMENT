@@ -93,6 +93,66 @@ void Restaurant::FillDrawingList()
 	//It should get orders from orders lists/queues/stacks/whatever (same for Cooks)
 	//To add orders it should call function  void GUI::AddToDrawingList(Order* pOrd);
 	//To add Cooks it should call function  void GUI::AddToDrawingList(Cook* pCc);
+	Node<Cook*>* tempcook = pAvliableNormalCook.getHead();	//adding normal cooks to drawing list
+	Cook* pcook;
+	while (tempcook)
+	{
+		pcook = tempcook->getItem();
+		pGUI->AddToDrawingList(pcook);
+		tempcook = tempcook->getNext();
+	}
+
+
+	tempcook = pAvliableVeganCook.getHead();	//adding vegan cooks to drawing list
+	while (tempcook)
+	{
+		pcook = tempcook->getItem();
+		pGUI->AddToDrawingList(pcook);
+		tempcook = tempcook->getNext();
+	}
+
+	tempcook = pAvliableVIPCook.getHead();	// adding VIP cooks to drawing list
+	while (tempcook)
+	{
+		pcook = tempcook->getItem();
+		pGUI->AddToDrawingList(pcook);
+		tempcook = tempcook->getNext();
+	}
+
+
+
+	Node<Order*>* temporder = NRM.getHead();	//adding normal orders to drawing list
+	Order* porder;
+	while (temporder)
+	{
+		porder = temporder->getItem();
+		pGUI->AddToDrawingList(porder);
+		temporder = temporder->getNext();
+	}
+
+	Order* firstVGNorder;	//adding VGN orders to drawing list
+	VGN.dequeue(firstVGNorder);
+	pGUI->AddToDrawingList(firstVGNorder);
+	VGN.peekFront(porder);
+	while (porder!=firstVGNorder)
+	{
+		VGN.dequeue(porder);
+		pGUI->AddToDrawingList(porder);
+		VGN.enqueue(porder);
+		VGN.peekFront(porder);
+	}
+
+	Order* firstVIPorder;	//adding VIP orders to drawing list
+	VIP.pop(firstVIPorder);
+	pGUI->AddToDrawingList(firstVIPorder);
+	VIP.peak(porder);
+	while (porder != firstVIPorder)
+	{
+		VIP.pop(porder);
+		pGUI->AddToDrawingList(porder);
+		VIP.insert(porder);
+		VIP.peak(porder);
+	}
 
 }
 
