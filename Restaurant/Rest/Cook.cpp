@@ -1,14 +1,21 @@
 #include "Cook.h"
 
-
+int Cook::ID = 1;
 Cook::Cook(ORD_TYPE t, int s)
 {
-	//ID = id;
+	ID++;
 	type = t;
 	speed = s;
 }
 
-Cook::Cook(){}
+Cook::Cook()
+{
+	ID++;
+	servingOrder = 0;
+	timeBackToAvaList = 0;
+	orderThatWorkedAt = nullptr;
+	TimeFinshOrder = 0;
+}
 
 void Cook::setSpeed(int s)
 {
@@ -36,7 +43,7 @@ Cook::~Cook()
 }
 
 
-int Cook::GetID() const
+int Cook::GetID()
 {
 	return ID;
 }
@@ -63,9 +70,9 @@ void Cook::setServingOrder(int s)
 	servingOrder = s;
 }
 
-void Cook::setTimeInBusyList(int t)
+void Cook::setTimeBackToAvaList(int t)
 {
-	timeInBusyList = t;
+	timeBackToAvaList = t;
 }
 
 void Cook::setOrderThatWorkedAt(Order* o)
@@ -73,14 +80,19 @@ void Cook::setOrderThatWorkedAt(Order* o)
 	orderThatWorkedAt = o;
 }
 
+void Cook::setTimeFinshOrder(int t)
+{
+	TimeFinshOrder = t;
+}
+
 int Cook::getServingOrder() const
 {
 	return servingOrder;
 }
 
-int Cook::getTimeInBusyList() const
+int Cook::getTimeBackToAvaList() const
 {
-	return timeInBusyList;
+	return timeBackToAvaList;
 }
 
 Order* Cook::getOrderThatWorkedAt() const
@@ -88,10 +100,18 @@ Order* Cook::getOrderThatWorkedAt() const
 	return orderThatWorkedAt;
 }
 
+//<<<<<<< HEAD
+int Cook::getTimeFinshOrder() const
+{
+	return TimeFinshOrder;
+}
+
+//=======
 void Cook::setRest(int r)
 {
 	Rest = r;
 }
+//>>>>>>> 4698248c273d0b796c914f2c25f2f664fb4f9b3c
 
 void Cook::setInjuryProbability(int i)
 {
