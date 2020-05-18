@@ -63,9 +63,9 @@ void Restaurant::ExecuteEvents(int CurrentTimeStep)
 
 Restaurant::~Restaurant()
 {
-	delete[]pNormalCook;	//added
+	/*delete[]pNormalCook;	//added
 	delete[]pVeganCook;
-	delete[]pVIPCook;
+	delete[]pVIPCook;*/
 	if (pGUI)
 		delete pGUI;
 }
@@ -131,6 +131,7 @@ void Restaurant::ReadInput(string FileName) //Gamal 17/5
 	
 	File >> APL >> VIPtoUrgent;
 
+	int id = 1;
 	for (size_t i = 0; i < CooksNum[0]; i++)	//loop to initialize normal cooks and add them to available cooks list
 	{
 		//pNormalCook[i].setSpeed(CooksSpd[0]);
@@ -142,9 +143,12 @@ void Restaurant::ReadInput(string FileName) //Gamal 17/5
 		newCook->setBreakTime(breakTime);
 		newCook->setRest(restPeriod);	// only needed to be set once, test period is implemented as static member and will be valid for all cooks
 		newCook->setInjuryProbability(injuryProbability);
+		newCook->setType(TYPE_NRM);
+		newCook->setID(id);
 		addToAvNorCook(newCook);
-
+		id++;
 	}
+
 	for (size_t i = 0; i < CooksNum[1]; i++)	//loop to initialize vegan cooks and add them to available cooks list
 	{
 		//pNormalCook[i].setSpeed(CooksSpd[1]);
@@ -156,7 +160,10 @@ void Restaurant::ReadInput(string FileName) //Gamal 17/5
 		newCook->setBreakTime(breakTime);
 		newCook->setRest(restPeriod);	// only needed to be set once, test period is implemented as static member and will be valid for all cooks
 		newCook->setInjuryProbability(injuryProbability);
+		newCook->setType(TYPE_VGAN);
+		newCook->setID(id);
 		addToAvVaCook(newCook);
+		id++;
 	}
 	for (size_t i = 0; i < CooksNum[2]; i++)	////loop to initialize VIP cooks and add them to available cooks list
 	{
@@ -169,7 +176,10 @@ void Restaurant::ReadInput(string FileName) //Gamal 17/5
 		newCook->setBreakTime(breakTime);
 		newCook->setRest(restPeriod);	// only needed to be set once, test period is implemented as static member and will be valid for all cooks
 		newCook->setInjuryProbability(injuryProbability);
+		newCook->setType(TYPE_VIP);
+		newCook->setID(id);
 		addToAvVIPCook(newCook);
+		id++;
 	}
 	
 	int EventsNum;	
@@ -203,7 +213,7 @@ void Restaurant::ReadInput(string FileName) //Gamal 17/5
 				break;
 			}
 			EventB = new ArrivalEvent(AT, ID, ORD, Size, Money);
-			Order OrderX(ID, ORD, AT, Size, Money);
+			//Order OrderX(ID, ORD, AT, Size, Money);
 			//OrdersList.InsertEnd(&OrderX);
 			//NRM.InsertEnd(&OrderX);
 			break;
@@ -224,12 +234,12 @@ void Restaurant::ReadInput(string FileName) //Gamal 17/5
 		}
 		}
 		EventsQueue.enqueue(EventB);
-		EventB->Execute(this);
+		//EventB->Execute(this);
 		/// NOT COMPLETED
 
 	}
-	NRM.PrintList();
-	VIP.printAsTree();
+	/*NRM.PrintList();
+	VIP.printAsTree();*/
 
 }
 
@@ -556,7 +566,7 @@ void Restaurant::HandleWithFinshedOrders(int currtime)
 		{
 			H->getItem()->getOrderThatWorkedAt()->setStatus(DONE);
 			FinshOrders.InsertEnd(H->getItem()->getOrderThatWorkedAt());// insert order to list finshed
-			Ncook = RemoveAndGetCookByIdFromBVC(H->getItem()->GetID());
+			Ncook = RemoveAndGetCookByIdFromBGC(H->getItem()->GetID());
 			Ncook->getItem()->setTimeFinshOrder(0);//reset time finshed to assin to new order
 			Ncook->getItem()->setOrderThatWorkedAt(NULL);// assin null order to cook
 			Ncook->getItem()->setServingOrder(Ncook->getItem()->getServingOrder() + 1); //increse num of finshed orders to this cook
@@ -604,7 +614,7 @@ void Restaurant::StepByStepMode()
 		CheckIfCooksBackFromBreak(CurrentTimeStep);//back from break
 
 
-		checkAutoPromote(CurrentTimeStep);
+		//checkAutoPromote(CurrentTimeStep);
 
 
 		
@@ -615,7 +625,8 @@ void Restaurant::StepByStepMode()
 		{
 			while (!pAvliableVIPCook.isEmpty()&& !VIP.isEmpty()) // first VIP cooks
 			{
-				VIP.pop(ord); // get the order that will be serve
+				VIP.peak(ord);// get the order that will be serve
+				VIP.pop(ord);
 				ord->setStatus(SRV);
 				cook=pAvliableVIPCook.Deletefirst()->getItem(); // get any avaliable VIP cook
 				cook->setOrderThatWorkedAt(ord); // assin order to cook
@@ -687,7 +698,23 @@ void Restaurant::StepByStepMode()
 		
 		Cook* cok;
 		Node<Cook*>* H = pAvliableNormalCook.getHead();//to travesre on the list
-		for (int i = 0; i < CooksNum[0]; i++)
+		for (int i = 0; i < CooksNum[0]&&H; i++)
+		{
+			cok = H->getItem();
+			pGUI->AddToDrawingList(cok);
+			H = H->getNext();
+		}
+
+		H = pAvliableVeganCook.getHead();//to travesre on the list
+		for (int i = 0; i < CooksNum[1] && H; i++)
+		{
+			cok = H->getItem();
+			pGUI->AddToDrawingList(cok);
+			H = H->getNext();
+		}
+
+		H = pAvliableVIPCook.getHead();//to travesre on the list
+		for (int i = 0; i < CooksNum[2] && H; i++)
 		{
 			cok = H->getItem();
 			pGUI->AddToDrawingList(cok);

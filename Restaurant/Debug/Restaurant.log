@@ -1,0 +1,21 @@
+﻿  Restaurant.cpp
+C:\Users\Lenovo\Github\CMP102_Project_Final\Restaurant\Generic_DS\Node.h(35): warning C5037: 'Node<T>::Node': an out-of-line definition of a member of a class template cannot have default arguments
+C:\Users\Lenovo\Github\CMP102_Project_Final\Restaurant\Generic_DS\Node.h(47): warning C5037: 'Node<T>::setNext': an out-of-line definition of a member of a class template cannot have default arguments
+C:\Users\Lenovo\Github\CMP102_Project_Final\Restaurant\MaxHEAP.h(187,2): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lenovo\Github\CMP102_Project_Final\Restaurant\MaxHEAP.h(322,2): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lenovo\Github\CMP102_Project_Final\Restaurant\MaxHEAP.h(331,2): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lenovo\Github\CMP102_Project_Final\Restaurant\Rest\Restaurant.cpp(135,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lenovo\Github\CMP102_Project_Final\Restaurant\Rest\Restaurant.cpp(152,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lenovo\Github\CMP102_Project_Final\Restaurant\Rest\Restaurant.cpp(168,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Lenovo\Github\CMP102_Project_Final\Restaurant\Rest\Restaurant.cpp(265,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Lenovo\Github\CMP102_Project_Final\Restaurant\Rest\Restaurant.cpp(319,3): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.
+C:\Users\Lenovo\Github\CMP102_Project_Final\Restaurant\Rest\Restaurant.cpp(633,33): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Lenovo\Github\CMP102_Project_Final\Restaurant\Rest\Restaurant.cpp(644,33): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Lenovo\Github\CMP102_Project_Final\Restaurant\Rest\Restaurant.cpp(653,33): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Lenovo\Github\CMP102_Project_Final\Restaurant\Rest\Restaurant.cpp(667,33): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Lenovo\Github\CMP102_Project_Final\Restaurant\Rest\Restaurant.cpp(680,33): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Lenovo\Github\CMP102_Project_Final\Restaurant\Rest\Restaurant.cpp(689,33): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Lenovo\Github\CMP102_Project_Final\Restaurant\Rest\Restaurant.cpp(605,3): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.
+C:\Users\Lenovo\Github\CMP102_Project_Final\Restaurant\Rest\Restaurant.cpp(497): warning C4700: uninitialized local variable 'Ncook' used
+C:\Users\Lenovo\Github\CMP102_Project_Final\Restaurant\Rest\Restaurant.cpp(457): warning C4700: uninitialized local variable 'Ncook' used
+  Restaurant.vcxproj -> C:\Users\Lenovo\Github\CMP102_Project_Final\Debug\Restaurant.exe

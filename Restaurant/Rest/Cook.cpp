@@ -1,6 +1,5 @@
 #include "Cook.h"
 
-int Cook::ID = 1;
 Cook::Cook(ORD_TYPE t, int s)
 {
 	ID++;
@@ -10,7 +9,6 @@ Cook::Cook(ORD_TYPE t, int s)
 
 Cook::Cook()
 {
-	ID++;
 	servingOrder = 0;
 	timeBackToAvaList = 0;
 	orderThatWorkedAt = nullptr;
