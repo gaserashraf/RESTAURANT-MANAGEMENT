@@ -47,6 +47,8 @@ private:
 	LinkedList<Cook*>pBusyVeganCook;
 	LinkedList<Cook*>pBusyVIPCook;
 
+	LinkedList<Order*>FinshOrders;
+
 
 	//gaser
 
@@ -102,8 +104,11 @@ public:
 	Node<Cook*>*RemoveAndGetCookByIdFromBGC(int id);
 	Node<Cook*>*RemoveAndGetCookByIdFromBVC(int id);
 
+	void addToFinshOrder(Order* o);
 
-	void CheckIfCooksTakeBreak();
+	void CheckIfCooksTakeBreak(int bo);
+
+	void HandleWithFinshedOrders(int currtime);
 
 	//start modes
 	void StepByStepMode();

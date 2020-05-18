@@ -33,8 +33,12 @@ public:
 	void setServingOrder(int s);
 	void setTimeInBusyList(int t);
 	void setOrderThatWorkedAt(Order* o);
+	void setTimeFinshOrder(int t);
 
 	int getServingOrder() const;
 	int getTimeInBusyList() const;
 	Order* getOrderThatWorkedAt() const;
+	int getTimeFinshOrder() const;
+
+	
 };

@@ -8,7 +8,13 @@ Cook::Cook(ORD_TYPE t, int s)
 	speed = s;
 }
 
-Cook::Cook(){}
+Cook::Cook()
+{
+	servingOrder = 0;
+	timeInBusyList = 0;
+	orderThatWorkedAt = nullptr;
+	TimeFinshOrder = 0;
+}
 
 void Cook::setSpeed(int s)
 {
@@ -73,6 +79,11 @@ void Cook::setOrderThatWorkedAt(Order* o)
 	orderThatWorkedAt = o;
 }
 
+void Cook::setTimeFinshOrder(int t)
+{
+	TimeFinshOrder = t;
+}
+
 int Cook::getServingOrder() const
 {
 	return servingOrder;
@@ -86,6 +97,11 @@ int Cook::getTimeInBusyList() const
 Order* Cook::getOrderThatWorkedAt() const
 {
 	return orderThatWorkedAt;
+}
+
+int Cook::getTimeFinshOrder() const
+{
+	return TimeFinshOrder;
 }
 
 
