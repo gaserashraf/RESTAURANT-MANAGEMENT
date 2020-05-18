@@ -500,9 +500,19 @@ Node<Cook*>* Restaurant::RemoveAndGetCookByIdFromBVC(int id)
 	return pBusyVIPCook.RemoveCookFromListWithOutDelete(id);
 }
 
+Node<Order*>* Restaurant::RemoveAndGetOrderByIdFromServeOrderList(int id)
+{
+	return ServeOrders.DeleteNodeId(id);
+}
+
 void Restaurant::addToFinshOrder(Order* o)
 {
 	FinshOrders.InsertEnd(o);
+}
+
+void Restaurant::addToServeOrder(Order* o)
+{
+	ServeOrders.InsertEnd(o);
 }
 
 void Restaurant::CheckIfCooksTakeBreak(int currStep)
@@ -514,6 +524,7 @@ void Restaurant::CheckIfCooksTakeBreak(int currStep)
 	{	
 		if (H->getItem()->getServingOrder() == BO) // this cook should take a break
 		{
+			Ncook = H;
 			Ncook->getItem()->setTimeBackToAvaList(currStep + Ncook->getItem()->getBreakTime());
 			Ncook = RemoveAndGetCookByIdFromANC(H->getItem()->GetID());
 			pBusyNormalCook.InsertEnd(Ncook->getItem());
@@ -526,8 +537,9 @@ void Restaurant::CheckIfCooksTakeBreak(int currStep)
 	{
 		if (H->getItem()->getServingOrder() == BO) // this cook should take a break
 		{
+			Ncook = H;
 			Ncook->getItem()->setTimeBackToAvaList(currStep + Ncook->getItem()->getBreakTime());
-			Ncook = RemoveAndGetCookByIdFromAVC(H->getItem()->GetID());
+			Ncook = RemoveAndGetCookByIdFromAGC(H->getItem()->GetID());
 			pBusyVeganCook.InsertEnd(Ncook->getItem());
 		}
 		H = H->getNext();
@@ -538,6 +550,7 @@ void Restaurant::CheckIfCooksTakeBreak(int currStep)
 	{
 		if (H->getItem()->getServingOrder() == BO) // this cook should take a break
 		{
+			Ncook = H;
 			Ncook->getItem()->setTimeBackToAvaList(currStep + Ncook->getItem()->getBreakTime());
 			Ncook = RemoveAndGetCookByIdFromAVC(H->getItem()->GetID());
 			pBusyVIPCook.InsertEnd(Ncook->getItem());
@@ -554,6 +567,7 @@ void Restaurant::CheckIfCooksBackFromBreak(int currStep)
 	{
 		if (H->getItem()->getTimeBackToAvaList() == currStep) // this cook should back from break
 		{
+			Ncook = H;
 			Ncook->getItem()->setTimeBackToAvaList(0);
 			Ncook = RemoveAndGetCookByIdFromBNC(H->getItem()->GetID());
 			pAvliableNormalCook.InsertEnd(Ncook->getItem());
@@ -566,6 +580,7 @@ void Restaurant::CheckIfCooksBackFromBreak(int currStep)
 	{
 		if (H->getItem()->getTimeBackToAvaList() == currStep) // this cook should take a break
 		{
+			Ncook = H;
 			Ncook->getItem()->setTimeBackToAvaList(0);
 			Ncook = RemoveAndGetCookByIdFromBGC(H->getItem()->GetID());
 			pAvliableVeganCook.InsertEnd(Ncook->getItem());
@@ -578,6 +593,7 @@ void Restaurant::CheckIfCooksBackFromBreak(int currStep)
 	{
 		if (H->getItem()->getTimeBackToAvaList() == currStep) // this cook should take a break
 		{
+			Ncook = H;
 			Ncook->getItem()->setTimeBackToAvaList(0);
 			Ncook = RemoveAndGetCookByIdFromBVC(H->getItem()->GetID());
 			pAvliableVIPCook.InsertEnd(Ncook->getItem());
@@ -591,8 +607,9 @@ void Restaurant::checkAutoPromote(int currStep)
 	Node<Order*>*H = NRM.getHead();
 	while (H)
 	{
-		if (H->getItem()->GetAT()+APL== currStep)//this mean this order should be move to VIP orders
+		if (H->getItem()->GetAT()+APL <= currStep)//this mean this order should be move to VIP orders
 		{
+			H->getItem()->SetType(TYPE_VIP);
 			VIP.insert(deleteOrderId(H->getItem()->GetID())->getItem());
 		}
 		H = H->getNext();
@@ -610,6 +627,7 @@ void Restaurant::HandleWithFinshedOrders(int currtime)
 		{
 			H->getItem()->getOrderThatWorkedAt()->setStatus(DONE); // make order done or finshed
 			FinshOrders.InsertEnd(H->getItem()->getOrderThatWorkedAt());// insert order to list finshed
+			RemoveAndGetOrderByIdFromServeOrderList(H->getItem()->getOrderThatWorkedAt()->GetID());//remove the order form severing list
 			Ncook = RemoveAndGetCookByIdFromBNC(H->getItem()->GetID()); // get the cook
 			Ncook->getItem()->setTimeFinshOrder(0);//reset time finshed to assin to new order
 			Ncook->getItem()->setOrderThatWorkedAt(NULL);// assin null order to cook
@@ -626,6 +644,7 @@ void Restaurant::HandleWithFinshedOrders(int currtime)
 		{
 			H->getItem()->getOrderThatWorkedAt()->setStatus(DONE);
 			FinshOrders.InsertEnd(H->getItem()->getOrderThatWorkedAt());// insert order to list finshed
+			RemoveAndGetOrderByIdFromServeOrderList(H->getItem()->getOrderThatWorkedAt()->GetID());//remove the order form severing list
 			Ncook = RemoveAndGetCookByIdFromBGC(H->getItem()->GetID());
 			Ncook->getItem()->setTimeFinshOrder(0);//reset time finshed to assin to new order
 			Ncook->getItem()->setOrderThatWorkedAt(NULL);// assin null order to cook
@@ -642,6 +661,7 @@ void Restaurant::HandleWithFinshedOrders(int currtime)
 		{
 			H->getItem()->getOrderThatWorkedAt()->setStatus(DONE);
 			FinshOrders.InsertEnd(H->getItem()->getOrderThatWorkedAt());// insert order to list finshed
+			RemoveAndGetOrderByIdFromServeOrderList(H->getItem()->getOrderThatWorkedAt()->GetID());//remove the order form severing list
 			Ncook = RemoveAndGetCookByIdFromBVC(H->getItem()->GetID());
 			Ncook->getItem()->setTimeFinshOrder(0);//reset time finshed to assin to new order
 			Ncook->getItem()->setOrderThatWorkedAt(NULL);// assin null order to cook
@@ -658,7 +678,7 @@ void Restaurant::StepByStepMode()
 
 
 	//as long as events queue is not empty yet
-	while (!EventsQueue.isEmpty())
+	while (!EventsQueue.isEmpty()||!VIP.isEmpty()||!NRM.isEmpty()||!VGN.isEmpty()||!ServeOrders.isEmpty())
 	{
 		//print current timestep
 		char timestep[10];
@@ -674,7 +694,7 @@ void Restaurant::StepByStepMode()
 		CheckIfCooksBackFromBreak(CurrentTimeStep);//back from break
 
 
-		//checkAutoPromote(CurrentTimeStep);
+		checkAutoPromote(CurrentTimeStep);
 
 
 		
@@ -685,13 +705,17 @@ void Restaurant::StepByStepMode()
 		{
 			while (!pAvliableVIPCook.isEmpty()&& !VIP.isEmpty()) // first VIP cooks
 			{
-				VIP.peak(ord);// get the order that will be serve
+				//VIP.peak(ord);// get the order that will be serve
 				VIP.pop(ord);
 				ord->setStatus(SRV);
 				cook=pAvliableVIPCook.Deletefirst()->getItem(); // get any avaliable VIP cook
-				cook->setOrderThatWorkedAt(ord); // assin order to cook
-				cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed())); //calc time will be finshed
-				pBusyVIPCook.InsertEnd(cook); //move the cook to busy
+				if (cook)
+				{
+					cook->setOrderThatWorkedAt(ord); // assin order to cook
+					addToServeOrder(ord);//add to sereving orders list
+					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
+					pBusyVIPCook.InsertEnd(cook); //move the cook to busy
+				}
 			}
 
 			// if not avaliable vip cook , we take form the normal and vagen cooks 
@@ -700,18 +724,26 @@ void Restaurant::StepByStepMode()
 				VIP.pop(ord); // get the order that will be serve
 				ord->setStatus(SRV);
 				cook = pAvliableNormalCook.Deletefirst()->getItem(); // get any avaliable NRm cook
-				cook->setOrderThatWorkedAt(ord); // assin order to cook
-				cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed())); //calc time will be finshed
-				pBusyNormalCook.InsertEnd(cook); //move the cook to busy
+				if (cook)
+				{
+					cook->setOrderThatWorkedAt(ord); // assin order to cook
+					addToServeOrder(ord);//add to sereving orders list
+					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
+					pBusyNormalCook.InsertEnd(cook); //move the cook to busy
+				}
 			}
 			while (!pAvliableVeganCook.isEmpty() && !VIP.isEmpty())
 			{
 				VIP.pop(ord); // get the order that will be serve
 				ord->setStatus(SRV);
 				cook = pAvliableVeganCook.Deletefirst()->getItem(); // get any avaliable VGN cook
-				cook->setOrderThatWorkedAt(ord); // assin order to cook
-				cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed())); //calc time will be finshed
-				pBusyVeganCook.InsertEnd(cook); //move the cook to busy
+				if (cook)
+				{
+					cook->setOrderThatWorkedAt(ord); // assin order to cook
+					addToServeOrder(ord);//add to sereving orders list
+					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
+					pBusyVeganCook.InsertEnd(cook); //move the cook to busy
+				}
 			}
 			
 		}
@@ -723,9 +755,13 @@ void Restaurant::StepByStepMode()
 				VGN.dequeue(ord); // get the order that will be serve
 				ord->setStatus(SRV);
 				cook = pAvliableVeganCook.Deletefirst()->getItem(); // get any avaliable VGN cook
-				cook->setOrderThatWorkedAt(ord); // assin order to cook
-				cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed())); //calc time will be finshed
-				pBusyVeganCook.InsertEnd(cook); //move the cook to busy
+				if (cook)
+				{
+					cook->setOrderThatWorkedAt(ord); // assin order to cook
+					addToServeOrder(ord);//add to sereving orders list
+					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
+					pBusyVeganCook.InsertEnd(cook); //move the cook to busy
+				}
 			}
 		}
 		// 3 
@@ -736,18 +772,26 @@ void Restaurant::StepByStepMode()
 				ord = NRM.Deletefirst()->getItem(); // get the order that will be serve
 				ord->setStatus(SRV);
 				cook = pAvliableNormalCook.Deletefirst()->getItem(); // get any avaliable NRm cook
-				cook->setOrderThatWorkedAt(ord); // assin order to cook
-				cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed())); //calc time will be finshed
-				pBusyNormalCook.InsertEnd(cook); //move the cook to busy
+				if (cook)
+				{
+					cook->setOrderThatWorkedAt(ord); // assin order to cook
+					addToServeOrder(ord);//add to sereving orders list
+					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
+					pBusyNormalCook.InsertEnd(cook); //move the cook to busy
+				}
 			}
 			while (!pAvliableVIPCook.isEmpty() && !NRM.isEmpty())
 			{
 				ord = NRM.Deletefirst()->getItem(); // get the order that will be serve
 				ord->setStatus(SRV);
 				cook = pAvliableVIPCook.Deletefirst()->getItem(); // get any avaliable VIP cook
-				cook->setOrderThatWorkedAt(ord); // assin order to cook
-				cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed())); //calc time will be finshed
-				pBusyVIPCook.InsertEnd(cook); //move the cook to busy
+				if (cook)
+				{
+					cook->setOrderThatWorkedAt(ord); // assin order to cook
+					addToServeOrder(ord);//add to sereving orders list
+					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed())+CurrentTimeStep); //calc time will be finshed
+					pBusyVIPCook.InsertEnd(cook); //move the cook to busy
+				}
 			}
 		}
 
@@ -756,6 +800,7 @@ void Restaurant::StepByStepMode()
 		HandleWithFinshedOrders(CurrentTimeStep);
 
 		
+		// Print Cooks id
 		Cook* cok;
 		Node<Cook*>* H = pAvliableNormalCook.getHead();//to travesre on the list
 		for (int i = 0; i < CooksNum[0]&&H; i++)
@@ -780,11 +825,59 @@ void Restaurant::StepByStepMode()
 			pGUI->AddToDrawingList(cok);
 			H = H->getNext();
 		}
+		// end of Print id cooks
+
+		// print id of waiting orders
+		int size = 0;
+		Order* pOrd;
+		Order** VIPOrders = VIP.toArray(size);
+		for (int i = 0; i < size; i++)
+		{
+			pOrd = VIPOrders[i];
+			pGUI->AddToDrawingList(pOrd);
+		}
+		size = 0;
+		
+		Order** Vegan_Orders_Array = VGN.toArray(size);
+
+		for (int i = 0; i < size; i++)
+		{
+			pOrd = Vegan_Orders_Array[i];
+			pGUI->AddToDrawingList(pOrd);
+		}
+		Node<Order*>*h = NRM.getHead();
+		while (h)
+		{
+			pGUI->AddToDrawingList(h->getItem());
+			h = h->getNext();
+		}
+		// print id of waiting orders
+
+		
+
+		// print id of sever orders
+		h = ServeOrders.getHead();
+		while (h)
+		{
+			pGUI->AddToDrawingList(h->getItem());
+			h = h->getNext();
+		}
+
+		// print id of sever orders
+		// print id of done orders
+		h = FinshOrders.getHead();
+		while (h)
+		{
+			pGUI->AddToDrawingList(h->getItem());
+			h = h->getNext();
+		}
+		// print id of done orders
 
 		pGUI->UpdateInterface();
 		Sleep(1000);
 		CurrentTimeStep++;	//advance timestep
 		pGUI->ResetDrawingList();
 	}
-
+	pGUI->PrintMessage("generation done, click to END program");
+	pGUI->waitForClick();
 }

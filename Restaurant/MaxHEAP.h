@@ -157,6 +157,7 @@ public:
 		}
 		std::cout << std::endl;
 	}
+	
 	void printAsTree() const
 	{
 		for (size_t i = 0; i < count; i++)
@@ -268,15 +269,28 @@ public:
 		}
 	}
 
-	bool peak(Order * Contain)
+	bool peak(Order *& Contain)
 	{
 		if (isEmpty()) return false;
 
 		Contain = Heap[0];
 		return true;
 	}
+	Order**& toArray(int& count)
+	{
+		Order** Arr = NULL;
+		if (!Heap)
+			return Arr;
+		Arr = new Order * [getCount()];
+		for (int i = 0; i < getCount(); i++)
+		{
+			Arr[i] = Heap[i];
+		}
+		count = getCount();
+		return Arr;
+	}
 
-	bool pop(Order * Contain)
+	bool pop(Order *& Contain)
 	{
 		if (isEmpty()) return false;
 
