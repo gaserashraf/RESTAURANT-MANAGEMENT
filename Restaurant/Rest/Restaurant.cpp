@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Restaurant.h"
 #include "..\Events\ArrivalEvent.h"
+#include "..\Generic_DS\LinkedList.h"
 
 using namespace std;
 
@@ -110,35 +111,67 @@ void Restaurant::addOrderToVip(Order* O)
 	VIP.insert(O);
 }
 
-void Restaurant::ReadInput(string FileName) //______>25/3<_________
+void Restaurant::ReadInput(string FileName) //Gamal 17/5
 {
 	ifstream File;
 	File.open(FileName);
 	File >> CooksNum[0] >> CooksNum[1] >> CooksNum[2];
-	//made 3 arrays for each cook type using num of cooks for each
+	/*
 	pNormalCook = new Cook[CooksNum[0]];
 	pVeganCook = new Cook[CooksNum[1]];
-	pVIPCook = new Cook[CooksNum[2]];
+	pVIPCook = new Cook[CooksNum[2]];*/
+	//File >> CooksSpd[0] >> CooksSpd[1] >> CooksSpd[2];
+	//File >> CooksBrk[3] >> CooksBrk[0] >> CooksBrk[1] >> CooksBrk[2];
+	
+	File >> minSpeeds[0] >> maxSpeeds[0] >> minSpeeds[1] >> maxSpeeds[1] >> minSpeeds[2] >> maxSpeeds[2];
 
-	File >> CooksSpd[0] >> CooksSpd[1] >> CooksSpd[2];
+	File >> BO >> minBreakTime[0] >> maxBreaktime[0] >> minBreakTime[1] >> maxBreaktime[1] >> minBreakTime[2] >> maxBreaktime[2];
 
-	File >> CooksBrk[3] >> CooksBrk[0] >> CooksBrk[1] >> CooksBrk[2];
-	for (size_t i = 0; i < CooksNum[0]; i++)
+	File >> injuryProbability >> restPeriod;
+	
+	File >> APL >> VIPtoUrgent;
+
+	for (size_t i = 0; i < CooksNum[0]; i++)	//loop to initialize normal cooks and add them to available cooks list
 	{
-		pNormalCook[i].setSpeed(CooksSpd[0]);
-		pNormalCook[i].setBreakTime(CooksBrk[0]);
+		//pNormalCook[i].setSpeed(CooksSpd[0]);
+		//pNormalCook[i].setBreakTime(CooksBrk[0]);
+		Cook* newCook = new Cook;
+		int speed = rand() % (maxSpeeds[0] - minSpeeds[0] + 1) + minSpeeds[0];
+		newCook->setSpeed(speed);
+		int breakTime = rand() % (maxBreaktime[0] - minBreakTime[0] + 1) + minBreakTime[0];
+		newCook->setBreakTime(breakTime);
+		newCook->setRest(restPeriod);	// only needed to be set once, test period is implemented as static member and will be valid for all cooks
+		newCook->setInjuryProbability(injuryProbability);
+		addToAvNorCook(newCook);
+
 	}
-	for (size_t i = 0; i < CooksNum[1]; i++)
+	for (size_t i = 0; i < CooksNum[1]; i++)	//loop to initialize vegan cooks and add them to available cooks list
 	{
-		pNormalCook[i].setSpeed(CooksSpd[1]);
-		pNormalCook[i].setBreakTime(CooksBrk[1]);
+		//pNormalCook[i].setSpeed(CooksSpd[1]);
+		//pNormalCook[i].setBreakTime(CooksBrk[1]);
+		Cook* newCook = new Cook;
+		int speed = rand() % (maxSpeeds[1] - minSpeeds[1] + 1) + minSpeeds[1];
+		newCook->setSpeed(speed);
+		int breakTime = rand() % (maxBreaktime[1] - minBreakTime[1] + 1) + minBreakTime[1];
+		newCook->setBreakTime(breakTime);
+		newCook->setRest(restPeriod);	// only needed to be set once, test period is implemented as static member and will be valid for all cooks
+		newCook->setInjuryProbability(injuryProbability);
+		addToAvVaCook(newCook);
 	}
-	for (size_t i = 0; i < CooksNum[2]; i++)
+	for (size_t i = 0; i < CooksNum[2]; i++)	////loop to initialize VIP cooks and add them to available cooks list
 	{
-		pNormalCook[i].setSpeed(CooksSpd[2]);
-		pNormalCook[i].setBreakTime(CooksBrk[2]);
+		//pNormalCook[i].setSpeed(CooksSpd[2]);
+		//pNormalCook[i].setBreakTime(CooksBrk[2]);
+		Cook* newCook = new Cook;
+		int speed = rand() % (maxSpeeds[2] - minSpeeds[2] + 1) + minSpeeds[2];
+		newCook->setSpeed(speed);
+		int breakTime = rand() % (maxBreaktime[2] - minBreakTime[2] + 1) + minBreakTime[2];
+		newCook->setBreakTime(breakTime);
+		newCook->setRest(restPeriod);	// only needed to be set once, test period is implemented as static member and will be valid for all cooks
+		newCook->setInjuryProbability(injuryProbability);
+		addToAvVIPCook(newCook);
 	}
-	File >> APL;
+	
 	int EventsNum;	
 	File >> EventsNum;
 	for (int i = 0; i < EventsNum; i++)
@@ -402,15 +435,16 @@ void Restaurant::addToFinshOrder(Order* o)
 	FinshOrders.InsertEnd(o);
 }
 
-void Restaurant::CheckIfCooksTakeBreak(int bo)
+void Restaurant::CheckIfCooksTakeBreak(int currStep)
 {
 	
 	Node<Cook*>* Ncook;
 	Node<Cook*> *H = pAvliableNormalCook.getHead();//to travesre on the list
 	while (H)
 	{	
-		if (H->getItem()->getServingOrder() == bo) // this cook should take a break
+		if (H->getItem()->getServingOrder() == BO) // this cook should take a break
 		{
+			Ncook->getItem()->setTimeBackToAvaList(currStep + Ncook->getItem()->getBreakTime());
 			Ncook = RemoveAndGetCookByIdFromANC(H->getItem()->GetID());
 			pBusyNormalCook.InsertEnd(Ncook->getItem());
 		}
@@ -420,8 +454,9 @@ void Restaurant::CheckIfCooksTakeBreak(int bo)
 	H = pAvliableVeganCook.getHead();
 	while (H)
 	{
-		if (H->getItem()->getServingOrder() == bo) // this cook should take a break
+		if (H->getItem()->getServingOrder() == BO) // this cook should take a break
 		{
+			Ncook->getItem()->setTimeBackToAvaList(currStep + Ncook->getItem()->getBreakTime());
 			Ncook = RemoveAndGetCookByIdFromAVC(H->getItem()->GetID());
 			pBusyVeganCook.InsertEnd(Ncook->getItem());
 		}
@@ -431,13 +466,68 @@ void Restaurant::CheckIfCooksTakeBreak(int bo)
 	H = pAvliableVIPCook.getHead();
 	while (H)
 	{
-		if (H->getItem()->getServingOrder() == bo) // this cook should take a break
+		if (H->getItem()->getServingOrder() == BO) // this cook should take a break
 		{
+			Ncook->getItem()->setTimeBackToAvaList(currStep + Ncook->getItem()->getBreakTime());
 			Ncook = RemoveAndGetCookByIdFromAVC(H->getItem()->GetID());
 			pBusyVIPCook.InsertEnd(Ncook->getItem());
 		}
 		H = H->getNext();
 	}
+}
+
+void Restaurant::CheckIfCooksBackFromBreak(int currStep)
+{
+	Node<Cook*>* Ncook;
+	Node<Cook*>* H = pBusyNormalCook.getHead();//to travesre on the list
+	while (H)
+	{
+		if (H->getItem()->getTimeBackToAvaList() == currStep) // this cook should back from break
+		{
+			Ncook->getItem()->setTimeBackToAvaList(0);
+			Ncook = RemoveAndGetCookByIdFromBNC(H->getItem()->GetID());
+			pAvliableNormalCook.InsertEnd(Ncook->getItem());
+		}
+		H = H->getNext();
+	}
+
+	H = pBusyVeganCook.getHead();
+	while (H)
+	{
+		if (H->getItem()->getTimeBackToAvaList() == currStep) // this cook should take a break
+		{
+			Ncook->getItem()->setTimeBackToAvaList(0);
+			Ncook = RemoveAndGetCookByIdFromBGC(H->getItem()->GetID());
+			pAvliableVeganCook.InsertEnd(Ncook->getItem());
+		}
+		H = H->getNext();
+	}
+
+	H = pBusyVIPCook.getHead();
+	while (H)
+	{
+		if (H->getItem()->getTimeBackToAvaList() == currStep) // this cook should take a break
+		{
+			Ncook->getItem()->setTimeBackToAvaList(0);
+			Ncook = RemoveAndGetCookByIdFromBVC(H->getItem()->GetID());
+			pAvliableVIPCook.InsertEnd(Ncook->getItem());
+		}
+		H = H->getNext();
+	}
+}
+
+void Restaurant::checkAutoPromote(int currStep)
+{
+	Node<Order*>*H = NRM.getHead();
+	while (H)
+	{
+		if (H->getItem()->GetAT()+APL== currStep)//this mean this order should be move to VIP orders
+		{
+			VIP.insert(deleteOrderId(H->getItem()->GetID())->getItem());
+		}
+		H = H->getNext();
+	}
+
 }
 
 void Restaurant::HandleWithFinshedOrders(int currtime)
@@ -510,18 +600,22 @@ void Restaurant::StepByStepMode()
 		ExecuteEvents(CurrentTimeStep); 
 
 		// 2 - take the cooks Break if thay deserve it :V
-		CheckIfCooksTakeBreak(0); 
+		CheckIfCooksTakeBreak(CurrentTimeStep); //take break
+		CheckIfCooksBackFromBreak(CurrentTimeStep);//back from break
+
+
+		checkAutoPromote(CurrentTimeStep);
 
 
 		
 		//3 - assin order  to cook
-		Order* ord;
-		Cook* cook;
+		Order* ord=NULL;
+		Cook* cook=NULL;
 		if(!VIP.isEmpty()) // serve vip first
 		{
 			while (!pAvliableVIPCook.isEmpty()&& !VIP.isEmpty()) // first VIP cooks
 			{
-				VIP.peak(ord); // get the order that will be serve
+				VIP.pop(ord); // get the order that will be serve
 				ord->setStatus(SRV);
 				cook=pAvliableVIPCook.Deletefirst()->getItem(); // get any avaliable VIP cook
 				cook->setOrderThatWorkedAt(ord); // assin order to cook
@@ -532,7 +626,7 @@ void Restaurant::StepByStepMode()
 			// if not avaliable vip cook , we take form the normal and vagen cooks 
 			while (!pAvliableNormalCook.isEmpty() && !VIP.isEmpty())
 			{
-				VIP.peak(ord); // get the order that will be serve
+				VIP.pop(ord); // get the order that will be serve
 				ord->setStatus(SRV);
 				cook = pAvliableNormalCook.Deletefirst()->getItem(); // get any avaliable NRm cook
 				cook->setOrderThatWorkedAt(ord); // assin order to cook
@@ -541,7 +635,7 @@ void Restaurant::StepByStepMode()
 			}
 			while (!pAvliableVeganCook.isEmpty() && !VIP.isEmpty())
 			{
-				VIP.peak(ord); // get the order that will be serve
+				VIP.pop(ord); // get the order that will be serve
 				ord->setStatus(SRV);
 				cook = pAvliableVeganCook.Deletefirst()->getItem(); // get any avaliable VGN cook
 				cook->setOrderThatWorkedAt(ord); // assin order to cook
@@ -589,6 +683,16 @@ void Restaurant::StepByStepMode()
 
 		// 4 - check handle with finsh order
 		HandleWithFinshedOrders(CurrentTimeStep);
+
+		
+		Cook* cok;
+		Node<Cook*>* H = pAvliableNormalCook.getHead();//to travesre on the list
+		for (int i = 0; i < CooksNum[0]; i++)
+		{
+			cok = H->getItem();
+			pGUI->AddToDrawingList(cok);
+			H = H->getNext();
+		}
 
 		pGUI->UpdateInterface();
 		Sleep(1000);

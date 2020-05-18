@@ -50,16 +50,31 @@ private:
 	LinkedList<Order*>FinshOrders;
 
 
-	//gaser
+	
 
-
-	int CooksNum[3]; //25/3
-	int CooksSpd[3]; //25/3
-	int CooksBrk[4]; //25/3
+	//Gamal 17/5
+	int CooksNum[3]; //25/3		
+	/*int CooksSpd[3]; //25/3	//cant work with these anymore since each individual cook
+	int CooksBrk[4]; //25/3*/	// has different speed and break time
 	int APL;
 	//
 	// TODO: Add More Data Members As Needed
 	//
+
+
+
+	int minSpeeds[3];	//an array for minimum speeds for each type: 0 for normal, 1 for vegan, 2 for VIP
+	int maxSpeeds[3];	//an array for maximum speeds for each type: 0 for normal, 1 for vegan, 2 for VIP	
+
+	int BO;	//numers of dishes done before a break
+	int minBreakTime[3];	//arrarys for min and max break time for each type
+	int maxBreaktime[3];
+	
+	int injuryProbability;
+	int restPeriod;
+
+	int VIPtoUrgent;
+
 
 public:
 	
@@ -106,12 +121,16 @@ public:
 
 	void addToFinshOrder(Order* o);
 
-	void CheckIfCooksTakeBreak(int bo);
+	void CheckIfCooksTakeBreak(int currStep);
+	void CheckIfCooksBackFromBreak(int currStep);
+
+	void checkAutoPromote(int currStep);
 
 	void HandleWithFinshedOrders(int currtime);
+	//gaser
 
 	//start modes
-	void StepByStepMode();
+	void StepByStepMode();//gaser
 
 	//end modes
 

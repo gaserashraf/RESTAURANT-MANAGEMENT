@@ -9,7 +9,7 @@ template <typename T>
 class LinkedList
 {
 private:
-	Node<T> *Head;	//Pointer to the head of the list
+	Node<T>* Head;	//Pointer to the head of the list
 	Node<T>* tail;//You can add tail pointer too (depending on your problem)
 public:
 
@@ -22,31 +22,31 @@ public:
 	//List is being desturcted ==> delete all items in the list
 	~LinkedList()
 	{
-		DeleteAll(); 
+		DeleteAll();
 	}
 	////////////////////////////////////////////////////////////////////////
 	/*
 	* Function: PrintList.
 	* prints the values of all nodes in a linked list.
 	*/
-	Node<T>*getHead()
+	Node<T>* getHead()
 	{
 		return Head;
 	}
-	void setHead(Node<T>*temp)
+	void setHead(Node<T>* temp)
 	{
 		Head = temp;
 	}
 	bool isEmpty()
 	{
-		return Head==0;
+		return Head == 0;
 	}
-	void PrintList()	
-	{		
-		cout<<"\nprinting list contents:\n\n";
-		Node<T> *p = Head;
+	void PrintList()
+	{
+		cout << "\nprinting list contents:\n\n";
+		Node<T>* p = Head;
 
-		while(p)
+		while (p)
 		{
 			cout << "[ " << p->getItem() << " ]";
 			cout << "--->";
@@ -54,18 +54,18 @@ public:
 		}
 		cout << "NULL\n";
 	}
-	
+
 	////////////////////////////////////////////////////////////////////////
 	/*
 	* Function: InsertBeg.
 	* Creates a new node and adds it to the beginning of a linked list.
-	* 
+	*
 	* Parameters:
 	*	- data : The value to be stored in the new node.
 	*/
-	void InsertBeg(const T &data)
+	void InsertBeg(const T& data)
 	{
-		Node<T> *R = new Node<T>(data);
+		Node<T>* R = new Node<T>(data);
 		R->setNext(Head);
 		Head = R;
 
@@ -77,7 +77,7 @@ public:
 	*/
 	void DeleteAll()
 	{
-		Node<T> *P = Head;
+		Node<T>* P = Head;
 		while (Head)
 		{
 			P = Head->getNext();
@@ -137,7 +137,7 @@ public:
 		{
 			if (temp->getItem() == value)
 				c++;
-			temp=(temp->getNext());
+			temp = (temp->getNext());
 		}
 		return c;
 	}
@@ -164,7 +164,7 @@ public:
 	//Deletes the last node in the list
 	void DeleteLast()
 	{
-		Node<T>* prev = Head, * temp=Head->getNext();
+		Node<T>* prev = Head, * temp = Head->getNext();
 		while (temp->getNext())
 		{
 			prev = temp;
@@ -232,7 +232,7 @@ public:
 			DeleteNode(value);
 		}
 		return 1;
-		
+
 	}
 
 	//[8]Merge
@@ -253,18 +253,70 @@ public:
 			temp = temp->getNext();
 			Head->setNext(prev);
 			prev = Head;
-			if(temp)
+			if (temp)
 				Head = temp;
 		}
 
 
 	}
-	Node<Order*>* DeleteNodeId(int id);
-	Node<Cook*>* RemoveCookFromListWithOutDelete(int id);
+	//template<>
+	Node<Order*>* DeleteNodeId(int id)
+	{
+		if (id == Head->getItem()->GetID())
+			return Deletefirst();
+		else if (id == tail->getItem()->GetID())
+			return Deletelast();
+
+		else
+		{
+			Node<Order*>* prev = Head, * temp = Head->getNext();
+			while (temp)
+			{
+				if (temp->getItem()->GetID() == id)
+					break;
+				prev = temp;
+				temp = temp->getNext();
+			}
+			if (temp)
+			{
+				prev->setNext(temp->getNext());
+				//delete temp;
+				return temp;
+			}
+		}
+		return NULL;
+	}
+	//template<>
+	Node<Cook*>* RemoveCookFromListWithOutDelete(int id)
+	{
+		if (id == Head->getItem()->GetID())
+			return Deletefirst();
+		else if (id == tail->getItem()->GetID())
+			return Deletelast();
+
+		else
+		{
+			Node<Cook*>* prev = Head, * temp = Head->getNext();
+			while (temp)
+			{
+				if (temp->getItem()->GetID() == id)
+					break;
+				prev = temp;
+				temp = temp->getNext();
+			}
+			if (temp)
+			{
+				prev->setNext(temp->getNext());
+				//delete temp;
+				return temp;
+			}
+		}
+		return NULL;
+	}
 };
 
 template<>
-void LinkedList<Order*>::PrintList()
+inline void LinkedList<Order*>::PrintList()
 {
 	cout << "\nprinting list contents:\n\n";
 	Node<Order*>* p = Head;
@@ -280,57 +332,4 @@ void LinkedList<Order*>::PrintList()
 
 #endif
 
-template<>
-inline Node<Order*>* LinkedList<Order*>::DeleteNodeId(int id)
-{
-	if (id == Head->getItem()->GetID())
-		return Deletefirst();
-	else if (id == tail->getItem()->GetID())
-		return Deletelast();
 
-	else
-	{
-		Node<Order*>* prev = Head, * temp = Head->getNext();
-		while (temp)
-		{
-			if (temp->getItem()->GetID() == id)
-				break;
-			prev = temp;
-			temp = temp->getNext();
-		}
-		if (temp)
-		{
-			prev->setNext(temp->getNext());
-			//delete temp;
-			return temp;
-		}
-	}
-	return NULL;
-}
-template<>
-inline Node<Cook*>* LinkedList<Cook*>::RemoveCookFromListWithOutDelete(int id)
-{
-	if (id == Head->getItem()->GetID())
-		return Deletefirst();
-	else if (id == tail->getItem()->GetID())
-		return Deletelast();
-
-	else
-	{
-		Node<Cook*>* prev = Head, * temp = Head->getNext();
-		while (temp)
-		{
-			if (temp->getItem()->GetID() == id)
-				break;
-			prev = temp;
-			temp = temp->getNext();
-		}
-		if (temp)
-		{
-			prev->setNext(temp->getNext());
-			//delete temp;
-			return temp;
-		}
-	}
-	return NULL;
-}
