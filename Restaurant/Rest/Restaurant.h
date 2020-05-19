@@ -50,9 +50,11 @@ private:
 
 
 	LinkedList<Order*>FinshOrders;
-	LinkedList<Order*>ServeOrders;
 
-	
+	LinkedList<Order*>ServeOrders;
+	int numServNOrder;
+	int numServGOrder;
+	int numServVOrder;
 
 	//Gamal 17/5
 	int CooksNum[3]; //25/3		
@@ -135,7 +137,7 @@ public:
 
 	//start modes
 	void StepByStepMode();//gaser
-	
+	void InteractiveMode();//gaser
 	//end modes
 
 

@@ -11,12 +11,14 @@ class LinkedList
 private:
 	Node<T>* Head;	//Pointer to the head of the list
 	Node<T>* tail;//You can add tail pointer too (depending on your problem)
+	int count;
 public:
 
 
 	LinkedList()
 	{
 		Head = tail = NULL;
+		count = 0;
 	}
 
 	//List is being desturcted ==> delete all items in the list
@@ -29,6 +31,10 @@ public:
 	* Function: PrintList.
 	* prints the values of all nodes in a linked list.
 	*/
+	int getSize()
+	{
+		return count;
+	}
 	Node<T>* getHead()
 	{
 		return Head;
@@ -68,6 +74,7 @@ public:
 		Node<T>* R = new Node<T>(data);
 		R->setNext(Head);
 		Head = R;
+		count++;
 
 	}
 	////////////////////////////////////////////////////////////////////////
@@ -109,6 +116,7 @@ public:
 			tail->setNext(newNode);
 			tail = newNode;
 		}
+		count++;
 	}
 
 	//[2]Find 
@@ -150,12 +158,14 @@ public:
 		Head = Head->getNext();
 		temp->setNext(NULL);
 		delete temp;
+		count--;
 	}
 	Node<T>* Deletefirst()
 	{
 		Node<T>* temp = Head;
 		Head = Head->getNext();
 		temp->setNext(NULL);
+		count--;
 		return temp;
 	}
 
@@ -173,6 +183,7 @@ public:
 		delete temp;
 		tail = prev;
 		tail->setNext(NULL);
+		count--;
 	}
 	Node<T>* Deletelast()
 	{
@@ -184,6 +195,7 @@ public:
 		}
 		tail = prev;
 		tail->setNext(NULL);
+		count--;
 		return temp;
 	}
 
@@ -212,6 +224,7 @@ public:
 			{
 				prev->setNext(temp->getNext());
 				delete temp;
+				count--;
 				return 1;
 			}
 		}
@@ -281,6 +294,7 @@ public:
 			{
 				prev->setNext(temp->getNext());
 				//delete temp;
+				count--;
 				return temp;
 			}
 		}
@@ -308,6 +322,7 @@ public:
 			{
 				prev->setNext(temp->getNext());
 				//delete temp;
+				count--;
 				return temp;
 			}
 		}

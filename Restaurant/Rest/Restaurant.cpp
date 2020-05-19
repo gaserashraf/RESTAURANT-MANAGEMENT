@@ -12,6 +12,9 @@ using namespace std;
 Restaurant::Restaurant()
 {
 	pGUI = NULL;
+	numServGOrder = 0;
+	numServVOrder = 0;
+	numServNOrder = 0;
 }
 
 void Restaurant::RunSimulation()
@@ -22,6 +25,7 @@ void Restaurant::RunSimulation()
 	{
 	case MODE_INTR:
 		ReadInput(pGUI->GetString());
+		InteractiveMode();
 		break;
 	case MODE_STEP:
 		ReadInput(pGUI->GetString());
@@ -502,7 +506,16 @@ Node<Cook*>* Restaurant::RemoveAndGetCookByIdFromBVC(int id)
 
 Node<Order*>* Restaurant::RemoveAndGetOrderByIdFromServeOrderList(int id)
 {
-	return ServeOrders.DeleteNodeId(id);
+	
+	Node<Order*>* No = ServeOrders.DeleteNodeId(id);
+	
+	if (No->getItem()->GetType() == TYPE_VIP)
+		numServVOrder--;
+	else if (No->getItem()->GetType() == TYPE_NRM)
+		numServNOrder--;
+	else if (No->getItem()->GetType() == TYPE_VGAN)
+		numServGOrder--;
+	return No;
 }
 
 void Restaurant::addToFinshOrder(Order* o)
@@ -513,6 +526,12 @@ void Restaurant::addToFinshOrder(Order* o)
 void Restaurant::addToServeOrder(Order* o)
 {
 	ServeOrders.InsertEnd(o);
+	if (o->GetType() == TYPE_VIP)
+		numServVOrder++;
+	else if (o->GetType() == TYPE_NRM)
+		numServNOrder++;
+	else if (o->GetType() == TYPE_VGAN)
+		numServGOrder++;
 }
 
 void Restaurant::CheckIfCooksTakeBreak(int currStep)
@@ -681,11 +700,13 @@ void Restaurant::StepByStepMode()
 	while (!EventsQueue.isEmpty()||!VIP.isEmpty()||!NRM.isEmpty()||!VGN.isEmpty()||!ServeOrders.isEmpty())
 	{
 		//print current timestep
-		char timestep[10];
-		itoa(CurrentTimeStep, timestep, 10);
-		pGUI->PrintMessage(timestep);
-
-
+		//char timestep[10];
+		//itoa(CurrentTimeStep, timestep, 10);
+		//string timestep = "TS: " + to_string(CurrentTimeStep);
+		//pGUI->PrintMessage(timestep);
+		//string NumberOfWaitingOrderN = "Num Of Waiting Normal Orders: " + to_string(NRM.getSize()) + " Num Of Waiting Vegan Orders: " + to_string(VGN.getSize()) + " Num Of Waiting VIP Orders: " + to_string(VIP.getCount());
+		//string arr[] = { timestep ,NumberOfWaitingOrderN };
+		
 		// 1 - execute events int this time step
 		ExecuteEvents(CurrentTimeStep); 
 
@@ -701,6 +722,7 @@ void Restaurant::StepByStepMode()
 		//3 - assin order  to cook
 		Order* ord=NULL;
 		Cook* cook=NULL;
+		string SEV = "";
 		if(!VIP.isEmpty()) // serve vip first
 		{
 			while (!pAvliableVIPCook.isEmpty()&& !VIP.isEmpty()) // first VIP cooks
@@ -711,6 +733,7 @@ void Restaurant::StepByStepMode()
 				cook=pAvliableVIPCook.Deletefirst()->getItem(); // get any avaliable VIP cook
 				if (cook)
 				{
+					SEV += "V" + to_string(cook->GetID()) + "(V" + to_string( ord->GetID() )+ ") , ";
 					cook->setOrderThatWorkedAt(ord); // assin order to cook
 					addToServeOrder(ord);//add to sereving orders list
 					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
@@ -726,6 +749,7 @@ void Restaurant::StepByStepMode()
 				cook = pAvliableNormalCook.Deletefirst()->getItem(); // get any avaliable NRm cook
 				if (cook)
 				{
+					SEV += "N" + to_string(cook->GetID()) + "(V" + to_string(ord->GetID()) + ") , ";
 					cook->setOrderThatWorkedAt(ord); // assin order to cook
 					addToServeOrder(ord);//add to sereving orders list
 					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
@@ -739,6 +763,7 @@ void Restaurant::StepByStepMode()
 				cook = pAvliableVeganCook.Deletefirst()->getItem(); // get any avaliable VGN cook
 				if (cook)
 				{
+					SEV += "G" + to_string(cook->GetID()) + "(V" + to_string(ord->GetID()) + ") , ";
 					cook->setOrderThatWorkedAt(ord); // assin order to cook
 					addToServeOrder(ord);//add to sereving orders list
 					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
@@ -757,6 +782,7 @@ void Restaurant::StepByStepMode()
 				cook = pAvliableVeganCook.Deletefirst()->getItem(); // get any avaliable VGN cook
 				if (cook)
 				{
+					SEV += "G" + to_string(cook->GetID()) + "(G" + to_string(ord->GetID()) + ") , ";
 					cook->setOrderThatWorkedAt(ord); // assin order to cook
 					addToServeOrder(ord);//add to sereving orders list
 					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
@@ -774,6 +800,7 @@ void Restaurant::StepByStepMode()
 				cook = pAvliableNormalCook.Deletefirst()->getItem(); // get any avaliable NRm cook
 				if (cook)
 				{
+					SEV += "N" + to_string(cook->GetID()) + "(N" + to_string(ord->GetID()) + ") , ";
 					cook->setOrderThatWorkedAt(ord); // assin order to cook
 					addToServeOrder(ord);//add to sereving orders list
 					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
@@ -787,6 +814,7 @@ void Restaurant::StepByStepMode()
 				cook = pAvliableVIPCook.Deletefirst()->getItem(); // get any avaliable VIP cook
 				if (cook)
 				{
+					SEV += "V" + to_string(cook->GetID()) + "(N" + to_string(ord->GetID()) + ") , ";
 					cook->setOrderThatWorkedAt(ord); // assin order to cook
 					addToServeOrder(ord);//add to sereving orders list
 					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed())+CurrentTimeStep); //calc time will be finshed
@@ -872,9 +900,241 @@ void Restaurant::StepByStepMode()
 			h = h->getNext();
 		}
 		// print id of done orders
-
+		string timestep = "TS: " + to_string(CurrentTimeStep);
+		pGUI->PrintMessage(timestep);
+		string NumberOfWaitingOrders = "Num Of Waiting Normal Orders: " + to_string(NRM.getSize()) + " ,Num Of Waiting Vegan Orders: " + to_string(VGN.getSize()) + " ,Num Of Waiting VIP Orders: " + to_string(VIP.getCount());
+		string NumberOfAvalibeCooks = "Num available Normal cooks: " + to_string(pAvliableNormalCook.getSize()) + " ,Num available Vegan cooks: " + to_string(pAvliableVeganCook.getSize()) + " ,Num available VIP cooks: " + to_string(pAvliableVIPCook.getSize());
+		string NumberServingOrders = "Num served Normal Orders: " + to_string(numServNOrder) + " ,Num served Vegan Orders: " + to_string(numServGOrder) + " ,Num served VIP Orders: " + to_string(numServVOrder);
+		string arr[] = { timestep ,NumberOfWaitingOrders, NumberOfAvalibeCooks,SEV, NumberServingOrders };
+		pGUI->PrintMessage(arr, 5);
 		pGUI->UpdateInterface();
 		Sleep(1000);
+		CurrentTimeStep++;	//advance timestep
+		pGUI->ResetDrawingList();
+	}
+	pGUI->PrintMessage("generation done, click to END program");
+	pGUI->waitForClick();
+}
+
+void Restaurant::InteractiveMode()
+{
+
+	int CurrentTimeStep = 1;
+
+
+	//as long as events queue is not empty yet
+	while (!EventsQueue.isEmpty() || !VIP.isEmpty() || !NRM.isEmpty() || !VGN.isEmpty() || !ServeOrders.isEmpty())
+	{
+		//print current timestep
+		//char timestep[10];
+		//itoa(CurrentTimeStep, timestep, 10);
+		//string timestep = "TS: " + to_string(CurrentTimeStep);
+		//pGUI->PrintMessage(timestep);
+		//string NumberOfWaitingOrderN = "Num Of Waiting Normal Orders: " + to_string(NRM.getSize()) + " Num Of Waiting Vegan Orders: " + to_string(VGN.getSize()) + " Num Of Waiting VIP Orders: " + to_string(VIP.getCount());
+		//string arr[] = { timestep ,NumberOfWaitingOrderN };
+
+		// 1 - execute events int this time step
+		ExecuteEvents(CurrentTimeStep);
+
+		// 2 - take the cooks Break if thay deserve it :V
+		CheckIfCooksTakeBreak(CurrentTimeStep); //take break
+		CheckIfCooksBackFromBreak(CurrentTimeStep);//back from break
+
+
+		checkAutoPromote(CurrentTimeStep);
+
+
+
+		//3 - assin order  to cook
+		Order* ord = NULL;
+		Cook* cook = NULL;
+		string SEV = "";
+		if (!VIP.isEmpty()) // serve vip first
+		{
+			while (!pAvliableVIPCook.isEmpty() && !VIP.isEmpty()) // first VIP cooks
+			{
+				//VIP.peak(ord);// get the order that will be serve
+				VIP.pop(ord);
+				ord->setStatus(SRV);
+				cook = pAvliableVIPCook.Deletefirst()->getItem(); // get any avaliable VIP cook
+				if (cook)
+				{
+					SEV += "V" + to_string(cook->GetID()) + "(V" + to_string(ord->GetID()) + ") , ";
+					cook->setOrderThatWorkedAt(ord); // assin order to cook
+					addToServeOrder(ord);//add to sereving orders list
+					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
+					pBusyVIPCook.InsertEnd(cook); //move the cook to busy
+				}
+			}
+
+			// if not avaliable vip cook , we take form the normal and vagen cooks 
+			while (!pAvliableNormalCook.isEmpty() && !VIP.isEmpty())
+			{
+				VIP.pop(ord); // get the order that will be serve
+				ord->setStatus(SRV);
+				cook = pAvliableNormalCook.Deletefirst()->getItem(); // get any avaliable NRm cook
+				if (cook)
+				{
+					SEV += "N" + to_string(cook->GetID()) + "(V" + to_string(ord->GetID()) + ") , ";
+					cook->setOrderThatWorkedAt(ord); // assin order to cook
+					addToServeOrder(ord);//add to sereving orders list
+					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
+					pBusyNormalCook.InsertEnd(cook); //move the cook to busy
+				}
+			}
+			while (!pAvliableVeganCook.isEmpty() && !VIP.isEmpty())
+			{
+				VIP.pop(ord); // get the order that will be serve
+				ord->setStatus(SRV);
+				cook = pAvliableVeganCook.Deletefirst()->getItem(); // get any avaliable VGN cook
+				if (cook)
+				{
+					SEV += "G" + to_string(cook->GetID()) + "(V" + to_string(ord->GetID()) + ") , ";
+					cook->setOrderThatWorkedAt(ord); // assin order to cook
+					addToServeOrder(ord);//add to sereving orders list
+					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
+					pBusyVeganCook.InsertEnd(cook); //move the cook to busy
+				}
+			}
+
+		}
+		// 2 serve Vegan orders
+		if (!VGN.isEmpty())
+		{
+			while (!pAvliableVeganCook.isEmpty() && !VGN.isEmpty())
+			{
+				VGN.dequeue(ord); // get the order that will be serve
+				ord->setStatus(SRV);
+				cook = pAvliableVeganCook.Deletefirst()->getItem(); // get any avaliable VGN cook
+				if (cook)
+				{
+					SEV += "G" + to_string(cook->GetID()) + "(G" + to_string(ord->GetID()) + ") , ";
+					cook->setOrderThatWorkedAt(ord); // assin order to cook
+					addToServeOrder(ord);//add to sereving orders list
+					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
+					pBusyVeganCook.InsertEnd(cook); //move the cook to busy
+				}
+			}
+		}
+		// 3 
+		if (!NRM.isEmpty())
+		{
+			while (!pAvliableNormalCook.isEmpty() && !NRM.isEmpty())
+			{
+				ord = NRM.Deletefirst()->getItem(); // get the order that will be serve
+				ord->setStatus(SRV);
+				cook = pAvliableNormalCook.Deletefirst()->getItem(); // get any avaliable NRm cook
+				if (cook)
+				{
+					SEV += "N" + to_string(cook->GetID()) + "(N" + to_string(ord->GetID()) + ") , ";
+					cook->setOrderThatWorkedAt(ord); // assin order to cook
+					addToServeOrder(ord);//add to sereving orders list
+					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
+					pBusyNormalCook.InsertEnd(cook); //move the cook to busy
+				}
+			}
+			while (!pAvliableVIPCook.isEmpty() && !NRM.isEmpty())
+			{
+				ord = NRM.Deletefirst()->getItem(); // get the order that will be serve
+				ord->setStatus(SRV);
+				cook = pAvliableVIPCook.Deletefirst()->getItem(); // get any avaliable VIP cook
+				if (cook)
+				{
+					SEV += "V" + to_string(cook->GetID()) + "(N" + to_string(ord->GetID()) + ") , ";
+					cook->setOrderThatWorkedAt(ord); // assin order to cook
+					addToServeOrder(ord);//add to sereving orders list
+					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
+					pBusyVIPCook.InsertEnd(cook); //move the cook to busy
+				}
+			}
+		}
+
+
+		// 4 - check handle with finsh order
+		HandleWithFinshedOrders(CurrentTimeStep);
+
+
+		// Print Cooks id
+		Cook* cok;
+		Node<Cook*>* H = pAvliableNormalCook.getHead();//to travesre on the list
+		for (int i = 0; i < CooksNum[0] && H; i++)
+		{
+			cok = H->getItem();
+			pGUI->AddToDrawingList(cok);
+			H = H->getNext();
+		}
+
+		H = pAvliableVeganCook.getHead();//to travesre on the list
+		for (int i = 0; i < CooksNum[1] && H; i++)
+		{
+			cok = H->getItem();
+			pGUI->AddToDrawingList(cok);
+			H = H->getNext();
+		}
+
+		H = pAvliableVIPCook.getHead();//to travesre on the list
+		for (int i = 0; i < CooksNum[2] && H; i++)
+		{
+			cok = H->getItem();
+			pGUI->AddToDrawingList(cok);
+			H = H->getNext();
+		}
+		// end of Print id cooks
+
+		// print id of waiting orders
+		int size = 0;
+		Order* pOrd;
+		Order** VIPOrders = VIP.toArray(size);
+		for (int i = 0; i < size; i++)
+		{
+			pOrd = VIPOrders[i];
+			pGUI->AddToDrawingList(pOrd);
+		}
+		size = 0;
+
+		Order** Vegan_Orders_Array = VGN.toArray(size);
+
+		for (int i = 0; i < size; i++)
+		{
+			pOrd = Vegan_Orders_Array[i];
+			pGUI->AddToDrawingList(pOrd);
+		}
+		Node<Order*>* h = NRM.getHead();
+		while (h)
+		{
+			pGUI->AddToDrawingList(h->getItem());
+			h = h->getNext();
+		}
+		// print id of waiting orders
+
+
+
+		// print id of sever orders
+		h = ServeOrders.getHead();
+		while (h)
+		{
+			pGUI->AddToDrawingList(h->getItem());
+			h = h->getNext();
+		}
+
+		// print id of sever orders
+		// print id of done orders
+		h = FinshOrders.getHead();
+		while (h)
+		{
+			pGUI->AddToDrawingList(h->getItem());
+			h = h->getNext();
+		}
+		// print id of done orders
+		string timestep = "TS: " + to_string(CurrentTimeStep);
+		pGUI->PrintMessage(timestep);
+		string NumberOfWaitingOrders = "Num Of Waiting Normal Orders: " + to_string(NRM.getSize()) + " ,Num Of Waiting Vegan Orders: " + to_string(VGN.getSize()) + " ,Num Of Waiting VIP Orders: " + to_string(VIP.getCount());
+		string NumberOfAvalibeCooks = "Num available Normal cooks: " + to_string(pAvliableNormalCook.getSize()) + " ,Num available Vegan cooks: " + to_string(pAvliableVeganCook.getSize()) + " ,Num available VIP cooks: " + to_string(pAvliableVIPCook.getSize());
+		string NumberServingOrders = "Num served Normal Orders: " + to_string(numServNOrder) + " ,Num served Vegan Orders: " + to_string(numServGOrder) + " ,Num served VIP Orders: " + to_string(numServVOrder);
+		string arr[] = { timestep ,NumberOfWaitingOrders, NumberOfAvalibeCooks,SEV, NumberServingOrders };
+		pGUI->PrintMessage(arr, 5);
+		pGUI->UpdateInterface();
+		pGUI->waitForClick();
 		CurrentTimeStep++;	//advance timestep
 		pGUI->ResetDrawingList();
 	}
