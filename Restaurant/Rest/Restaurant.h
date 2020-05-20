@@ -57,6 +57,7 @@ private:
 	int numServVOrder;
 
 	//Gamal 17/5
+
 	int CooksNum[3]; //25/3		
 	/*int CooksSpd[3]; //25/3	//cant work with these anymore since each individual cook
 	int CooksBrk[4]; //25/3*/	// has different speed and break time
@@ -78,7 +79,10 @@ private:
 	int restPeriod;
 
 	int VIPtoUrgent;
-
+	
+	int numNormalOrders = 0;
+	int numVeganOrders = 0;
+	int numVIPOrders = 0;
 
 public:
 	
@@ -91,7 +95,10 @@ public:
 	void ExecuteEvents(int TimeStep);	//executes all events at current timestep
 	void RunSimulation();
 
-	void ReadInput(string FileName); // 25/3
+	void ReadInput(string FileName);	// Gamal 25/3
+	void ReturnOutput();	//Gamal 20/5
+	float AverageWaitingTime();	//Gamal 20/5
+	float AverageServingTime();	//Gamal 20/5
 
 	void FillDrawingList();
 
@@ -138,6 +145,7 @@ public:
 	//start modes
 	void StepByStepMode();//gaser
 	void InteractiveMode();//gaser
+	void SilentMode();	//Gamal 20/5
 	//end modes
 
 

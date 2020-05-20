@@ -33,6 +33,7 @@ void Restaurant::RunSimulation()
 		break;
 	case MODE_SLNT:
 		ReadInput(pGUI->GetString());
+		SilentMode();
 		break;
 	case MODE_DEMO:
 	{
@@ -92,7 +93,7 @@ Node<Order*>* Restaurant::deleteOrderId(int id)
 
 
 
-void Restaurant::FillDrawingList()
+void Restaurant::FillDrawingList()	//Gamal 18/5
 {
 	//This function should be implemented in phase1
 	//It should add ALL orders and Cooks to the drawing list
@@ -268,12 +269,15 @@ void Restaurant::ReadInput(string FileName) //Gamal 17/5
 			{
 			case 'N':
 				ORD = TYPE_NRM;
+				numNormalOrders++;
 				break;
 			case 'V':
 				ORD = TYPE_VIP;
+				numVIPOrders++;
 				break;
 			case 'G':
 				ORD = TYPE_VGAN;
+				numVeganOrders++;
 				break;
 			}
 			EventB = new ArrivalEvent(AT, ID, ORD, Size, Money);
@@ -738,6 +742,10 @@ void Restaurant::StepByStepMode()
 					addToServeOrder(ord);//add to sereving orders list
 					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
 					pBusyVIPCook.InsertEnd(cook); //move the cook to busy
+
+					ord->setWaitTime(CurrentTimeStep - ord->GetAT());
+					ord->setServTime(ceil(ord->GetSize() / cook->getSpeed()));
+					ord->setFinishTime(ord->GetAT() + ord->getWaitTime() + ord->getServTime());	//shouldn't setTimeFinshOrder use the same equation??
 				}
 			}
 
@@ -754,6 +762,10 @@ void Restaurant::StepByStepMode()
 					addToServeOrder(ord);//add to sereving orders list
 					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
 					pBusyNormalCook.InsertEnd(cook); //move the cook to busy
+
+					ord->setWaitTime(CurrentTimeStep - ord->GetAT());
+					ord->setServTime(ceil(ord->GetSize() / cook->getSpeed()));
+					ord->setFinishTime(ord->GetAT() + ord->getWaitTime() + ord->getServTime());	//shouldn't setTimeFinshOrder use the same equation??
 				}
 			}
 			while (!pAvliableVeganCook.isEmpty() && !VIP.isEmpty())
@@ -768,6 +780,10 @@ void Restaurant::StepByStepMode()
 					addToServeOrder(ord);//add to sereving orders list
 					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
 					pBusyVeganCook.InsertEnd(cook); //move the cook to busy
+
+					ord->setWaitTime(CurrentTimeStep - ord->GetAT());
+					ord->setServTime(ceil(ord->GetSize() / cook->getSpeed()));
+					ord->setFinishTime(ord->GetAT() + ord->getWaitTime() + ord->getServTime());	//shouldn't setTimeFinshOrder use the same equation??
 				}
 			}
 			
@@ -787,6 +803,10 @@ void Restaurant::StepByStepMode()
 					addToServeOrder(ord);//add to sereving orders list
 					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
 					pBusyVeganCook.InsertEnd(cook); //move the cook to busy
+
+					ord->setWaitTime(CurrentTimeStep - ord->GetAT());
+					ord->setServTime(ceil(ord->GetSize() / cook->getSpeed()));
+					ord->setFinishTime(ord->GetAT() + ord->getWaitTime() + ord->getServTime());	//shouldn't setTimeFinshOrder use the same equation??
 				}
 			}
 		}
@@ -805,6 +825,10 @@ void Restaurant::StepByStepMode()
 					addToServeOrder(ord);//add to sereving orders list
 					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
 					pBusyNormalCook.InsertEnd(cook); //move the cook to busy
+
+					ord->setWaitTime(CurrentTimeStep - ord->GetAT());
+					ord->setServTime(ceil(ord->GetSize() / cook->getSpeed()));
+					ord->setFinishTime(ord->GetAT() + ord->getWaitTime() + ord->getServTime());	//shouldn't setTimeFinshOrder use the same equation??
 				}
 			}
 			while (!pAvliableVIPCook.isEmpty() && !NRM.isEmpty())
@@ -819,6 +843,10 @@ void Restaurant::StepByStepMode()
 					addToServeOrder(ord);//add to sereving orders list
 					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed())+CurrentTimeStep); //calc time will be finshed
 					pBusyVIPCook.InsertEnd(cook); //move the cook to busy
+
+					ord->setWaitTime(CurrentTimeStep - ord->GetAT());
+					ord->setServTime(ceil(ord->GetSize() / cook->getSpeed()));
+					ord->setFinishTime(ord->GetAT() + ord->getWaitTime() + ord->getServTime());	//shouldn't setTimeFinshOrder use the same equation??
 				}
 			}
 		}
@@ -912,6 +940,7 @@ void Restaurant::StepByStepMode()
 		CurrentTimeStep++;	//advance timestep
 		pGUI->ResetDrawingList();
 	}
+	ReturnOutput();
 	pGUI->PrintMessage("generation done, click to END program");
 	pGUI->waitForClick();
 }
@@ -964,6 +993,10 @@ void Restaurant::InteractiveMode()
 					addToServeOrder(ord);//add to sereving orders list
 					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
 					pBusyVIPCook.InsertEnd(cook); //move the cook to busy
+
+					ord->setWaitTime(CurrentTimeStep - ord->GetAT());
+					ord->setServTime(ceil(ord->GetSize() / cook->getSpeed()));
+					ord->setFinishTime(ord->GetAT() + ord->getWaitTime() + ord->getServTime());	//shouldn't setTimeFinshOrder use the same equation??
 				}
 			}
 
@@ -980,6 +1013,10 @@ void Restaurant::InteractiveMode()
 					addToServeOrder(ord);//add to sereving orders list
 					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
 					pBusyNormalCook.InsertEnd(cook); //move the cook to busy
+
+					ord->setWaitTime(CurrentTimeStep - ord->GetAT());
+					ord->setServTime(ceil(ord->GetSize() / cook->getSpeed()));
+					ord->setFinishTime(ord->GetAT() + ord->getWaitTime() + ord->getServTime());	//shouldn't setTimeFinshOrder use the same equation??
 				}
 			}
 			while (!pAvliableVeganCook.isEmpty() && !VIP.isEmpty())
@@ -1013,6 +1050,10 @@ void Restaurant::InteractiveMode()
 					addToServeOrder(ord);//add to sereving orders list
 					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
 					pBusyVeganCook.InsertEnd(cook); //move the cook to busy
+
+					ord->setWaitTime(CurrentTimeStep - ord->GetAT());
+					ord->setServTime(ceil(ord->GetSize() / cook->getSpeed()));
+					ord->setFinishTime(ord->GetAT() + ord->getWaitTime() + ord->getServTime());	//shouldn't setTimeFinshOrder use the same equation??
 				}
 			}
 		}
@@ -1031,6 +1072,10 @@ void Restaurant::InteractiveMode()
 					addToServeOrder(ord);//add to sereving orders list
 					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
 					pBusyNormalCook.InsertEnd(cook); //move the cook to busy
+
+					ord->setWaitTime(CurrentTimeStep - ord->GetAT());
+					ord->setServTime(ceil(ord->GetSize() / cook->getSpeed()));
+					ord->setFinishTime(ord->GetAT() + ord->getWaitTime() + ord->getServTime());	//shouldn't setTimeFinshOrder use the same equation??
 				}
 			}
 			while (!pAvliableVIPCook.isEmpty() && !NRM.isEmpty())
@@ -1045,6 +1090,10 @@ void Restaurant::InteractiveMode()
 					addToServeOrder(ord);//add to sereving orders list
 					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
 					pBusyVIPCook.InsertEnd(cook); //move the cook to busy
+
+					ord->setWaitTime(CurrentTimeStep - ord->GetAT());
+					ord->setServTime(ceil(ord->GetSize() / cook->getSpeed()));
+					ord->setFinishTime(ord->GetAT() + ord->getWaitTime() + ord->getServTime());	//shouldn't setTimeFinshOrder use the same equation??
 				}
 			}
 		}
@@ -1138,6 +1187,223 @@ void Restaurant::InteractiveMode()
 		CurrentTimeStep++;	//advance timestep
 		pGUI->ResetDrawingList();
 	}
+	ReturnOutput();
 	pGUI->PrintMessage("generation done, click to END program");
 	pGUI->waitForClick();
+}
+
+void Restaurant::SilentMode()
+{
+	int CurrentTimeStep = 1;
+
+
+	//as long as events queue is not empty yet
+	while (!EventsQueue.isEmpty() || !VIP.isEmpty() || !NRM.isEmpty() || !VGN.isEmpty() || !ServeOrders.isEmpty())
+	{
+		//print current timestep
+		//char timestep[10];
+		//itoa(CurrentTimeStep, timestep, 10);
+		//string timestep = "TS: " + to_string(CurrentTimeStep);
+		//pGUI->PrintMessage(timestep);
+		//string NumberOfWaitingOrderN = "Num Of Waiting Normal Orders: " + to_string(NRM.getSize()) + " Num Of Waiting Vegan Orders: " + to_string(VGN.getSize()) + " Num Of Waiting VIP Orders: " + to_string(VIP.getCount());
+		//string arr[] = { timestep ,NumberOfWaitingOrderN };
+
+		// 1 - execute events int this time step
+		ExecuteEvents(CurrentTimeStep);
+
+		// 2 - take the cooks Break if thay deserve it :V
+		CheckIfCooksTakeBreak(CurrentTimeStep); //take break
+		CheckIfCooksBackFromBreak(CurrentTimeStep);//back from break
+
+
+		checkAutoPromote(CurrentTimeStep);
+
+
+
+		//3 - assin order  to cook
+		Order* ord = NULL;
+		Cook* cook = NULL;
+		string SEV = "";
+		if (!VIP.isEmpty()) // serve vip first
+		{
+			while (!pAvliableVIPCook.isEmpty() && !VIP.isEmpty()) // first VIP cooks
+			{
+				//VIP.peak(ord);// get the order that will be serve
+				VIP.pop(ord);
+				ord->setStatus(SRV);
+				cook = pAvliableVIPCook.Deletefirst()->getItem(); // get any avaliable VIP cook
+				if (cook)
+				{
+					SEV += "V" + to_string(cook->GetID()) + "(V" + to_string(ord->GetID()) + ") , ";
+					cook->setOrderThatWorkedAt(ord); // assin order to cook
+					addToServeOrder(ord);//add to sereving orders list
+					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
+					pBusyVIPCook.InsertEnd(cook); //move the cook to busy
+
+					ord->setWaitTime(CurrentTimeStep - ord->GetAT());
+					ord->setServTime(ceil(ord->GetSize() / cook->getSpeed()));
+					ord->setFinishTime(ord->GetAT() + ord->getWaitTime() + ord->getServTime());	//shouldn't setTimeFinshOrder use the same equation??
+				}
+			}
+
+			// if not avaliable vip cook , we take form the normal and vagen cooks 
+			while (!pAvliableNormalCook.isEmpty() && !VIP.isEmpty())
+			{
+				VIP.pop(ord); // get the order that will be serve
+				ord->setStatus(SRV);
+				cook = pAvliableNormalCook.Deletefirst()->getItem(); // get any avaliable NRm cook
+				if (cook)
+				{
+					SEV += "N" + to_string(cook->GetID()) + "(V" + to_string(ord->GetID()) + ") , ";
+					cook->setOrderThatWorkedAt(ord); // assin order to cook
+					addToServeOrder(ord);//add to sereving orders list
+					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
+					pBusyNormalCook.InsertEnd(cook); //move the cook to busy
+
+					ord->setWaitTime(CurrentTimeStep - ord->GetAT());
+					ord->setServTime(ceil(ord->GetSize() / cook->getSpeed()));
+					ord->setFinishTime(ord->GetAT() + ord->getWaitTime() + ord->getServTime());	//shouldn't setTimeFinshOrder use the same equation??
+				}
+			}
+			while (!pAvliableVeganCook.isEmpty() && !VIP.isEmpty())
+			{
+				VIP.pop(ord); // get the order that will be serve
+				ord->setStatus(SRV);
+				cook = pAvliableVeganCook.Deletefirst()->getItem(); // get any avaliable VGN cook
+				if (cook)
+				{
+					SEV += "G" + to_string(cook->GetID()) + "(V" + to_string(ord->GetID()) + ") , ";
+					cook->setOrderThatWorkedAt(ord); // assin order to cook
+					addToServeOrder(ord);//add to sereving orders list
+					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
+					pBusyVeganCook.InsertEnd(cook); //move the cook to busy
+
+					ord->setWaitTime(CurrentTimeStep - ord->GetAT());
+					ord->setServTime(ceil(ord->GetSize() / cook->getSpeed()));
+					ord->setFinishTime(ord->GetAT() + ord->getWaitTime() + ord->getServTime());	//shouldn't setTimeFinshOrder use the same equation??
+				}
+			}
+
+		}
+		// 2 serve Vegan orders
+		if (!VGN.isEmpty())
+		{
+			while (!pAvliableVeganCook.isEmpty() && !VGN.isEmpty())
+			{
+				VGN.dequeue(ord); // get the order that will be serve
+				 
+				cook = pAvliableVeganCook.Deletefirst()->getItem(); // get any avaliable VGN cook
+				if (cook)
+				{
+					SEV += "G" + to_string(cook->GetID()) + "(G" + to_string(ord->GetID()) + ") , ";
+					cook->setOrderThatWorkedAt(ord); // assin order to cook
+					addToServeOrder(ord);//add to sereving orders list
+					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
+					pBusyVeganCook.InsertEnd(cook); //move the cook to busy
+
+					ord->setWaitTime(CurrentTimeStep - ord->GetAT());
+					ord->setServTime(ceil(ord->GetSize() / cook->getSpeed()));
+					ord->setFinishTime(ord->GetAT() + ord->getWaitTime() + ord->getServTime());	//shouldn't setTimeFinshOrder use the same equation??
+				}
+			}
+		}
+		// 3 
+		if (!NRM.isEmpty())
+		{
+			while (!pAvliableNormalCook.isEmpty() && !NRM.isEmpty())
+			{
+				ord = NRM.Deletefirst()->getItem(); // get the order that will be serve
+				ord->setStatus(SRV);
+				cook = pAvliableNormalCook.Deletefirst()->getItem(); // get any avaliable NRm cook
+				if (cook)
+				{
+					SEV += "N" + to_string(cook->GetID()) + "(N" + to_string(ord->GetID()) + ") , ";
+					cook->setOrderThatWorkedAt(ord); // assin order to cook
+					addToServeOrder(ord);//add to sereving orders list
+					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
+					pBusyNormalCook.InsertEnd(cook); //move the cook to busy
+
+					ord->setWaitTime(CurrentTimeStep - ord->GetAT());
+					ord->setServTime(ceil(ord->GetSize() / cook->getSpeed()));
+					ord->setFinishTime(ord->GetAT() + ord->getWaitTime() + ord->getServTime());	//shouldn't setTimeFinshOrder use the same equation??
+				}
+			}
+			while (!pAvliableVIPCook.isEmpty() && !NRM.isEmpty())
+			{
+				ord = NRM.Deletefirst()->getItem(); // get the order that will be serve
+				ord->setStatus(SRV);
+				cook = pAvliableVIPCook.Deletefirst()->getItem(); // get any avaliable VIP cook
+				if (cook)
+				{
+					SEV += "V" + to_string(cook->GetID()) + "(N" + to_string(ord->GetID()) + ") , ";
+					cook->setOrderThatWorkedAt(ord); // assin order to cook
+					addToServeOrder(ord);//add to sereving orders list
+					cook->setTimeFinshOrder(ceil(ord->GetSize() / cook->getSpeed()) + CurrentTimeStep); //calc time will be finshed
+					pBusyVIPCook.InsertEnd(cook); //move the cook to busy
+
+					ord->setWaitTime(CurrentTimeStep - ord->GetAT());
+					ord->setServTime(ceil(ord->GetSize() / cook->getSpeed()));
+					ord->setFinishTime(ord->GetAT() + ord->getWaitTime() + ord->getServTime());	//shouldn't setTimeFinshOrder use the same equation??
+				}
+			}
+		}
+
+
+		// 4 - check handle with finsh order
+		HandleWithFinshedOrders(CurrentTimeStep);
+		CurrentTimeStep++;
+	}
+	ReturnOutput();
+	pGUI->PrintMessage("generation done, click to END program");
+	pGUI->waitForClick();
+}
+
+
+void Restaurant::ReturnOutput()
+{
+	Node<Order*>* curFinishedOrder = FinshOrders.getHead();
+	ofstream OutputFile("SampleOutput.txt");
+	OutputFile << "FT	" << "ID	" << "AT	" << "WT	" << "ST	" << endl;
+	while (curFinishedOrder)
+	{
+		OutputFile << curFinishedOrder->getItem()->getFinishTime() << "	" << curFinishedOrder->getItem()->GetID() << "	" << curFinishedOrder->getItem()->GetAT()
+			<< "	" << curFinishedOrder->getItem()->getWaitTime() << "	" << curFinishedOrder->getItem()->getServTime() << "	" << endl;
+		curFinishedOrder = curFinishedOrder->getNext();
+
+		//orders need to be sorted accodring to Serving time
+	}
+	OutputFile << "Orders: " << FinshOrders.getSize() << "	[Norm: " << numNormalOrders << ", Veg: " << numVeganOrders << ", VIP: " << numVIPOrders <<"]"<< endl;
+
+	OutputFile << "Cooks: " << CooksNum[0] + CooksNum[1] + CooksNum[2] << "	[Norm: " << CooksNum[0] << ", Veg: " << CooksNum[1] << ", VIP: " << CooksNum[2] <<"]"<< endl;
+	//need to add no of injured cooks
+
+	OutputFile << "Avg Wait= " << AverageWaitingTime() << "	Avg Serv= " << AverageServingTime() << endl;
+
+	//last line needs urgent orders and number of auto promoted orders
+	OutputFile.close();
+}
+
+float Restaurant::AverageWaitingTime()
+{
+	Node<Order*>* cur = FinshOrders.getHead();
+	float totalwait=0; 
+	while (cur)
+	{
+		totalwait += cur->getItem()->getWaitTime();
+		cur = cur->getNext();
+	}
+	return totalwait / FinshOrders.getSize();
+}
+
+float Restaurant::AverageServingTime()
+{
+	Node<Order*>* cur = FinshOrders.getHead();
+	float totalserv = 0;
+	while (cur)
+	{
+		totalserv += cur->getItem()->getServTime();
+		cur = cur->getNext();
+	}
+	return totalserv / FinshOrders.getSize();
+
 }

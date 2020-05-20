@@ -76,6 +76,41 @@ double Order::calcWeight() const
 	return totalMoney / ArrTime / Size;
 }
 
+void Order::setServTime(int s)
+{
+	ServTime = s;
+}
+
+int Order::getServTime() const
+{
+	return ServTime;
+}
+
+void Order::setFinishTime(int t)
+{
+	FinishTime = t;
+}
+
+int Order::getFinishTime() const
+{
+	return FinishTime;
+}
+
+void Order::setArrivalTime(int t)
+{
+	ArrTime = t;
+}
+
+void Order::setWaitTime(int t)
+{
+	WaitTime = t;
+}
+
+int Order::getWaitTime()
+{
+	return WaitTime;
+}
+
 bool Order::operator<(const Order& Arg) const
 {
 	return calcWeight() < Arg.calcWeight();

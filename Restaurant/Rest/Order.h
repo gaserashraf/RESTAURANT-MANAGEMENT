@@ -16,6 +16,8 @@ protected:
 
 	int ArrTime, ServTime, FinishTime;	//arrival, service start, and finish times
 	int Size;
+
+	int WaitTime;
 	
 	
 	//
@@ -37,7 +39,7 @@ public:
 	double GetMoney() const;
 	double GetSize() const;
 	double GetAT() const;
-
+	
 
 	void setStatus(ORD_STATUS s);
 	ORD_STATUS getStatus() const;
@@ -49,6 +51,16 @@ public:
 	//
 	// TODO: Add More Member Functions As Needed
 	//
+
+	//Gamal 20/5
+	void setServTime(int s);
+	int getServTime() const;
+	void setFinishTime(int t);
+	int getFinishTime() const ;
+	void setArrivalTime(int t);
+	void setWaitTime(int t);
+	int getWaitTime();
+
 
 };
 
