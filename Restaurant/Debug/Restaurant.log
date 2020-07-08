@@ -1,0 +1,216 @@
+﻿  CMUgraphics.cpp
+E:\projects\CMP102_Project_Final - URG\Restaurant\CMUgraphicsLib\CMUgraphics.cpp(751,3): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\projects\CMP102_Project_Final - URG\Restaurant\CMUgraphicsLib\CMUgraphics.cpp(1164,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\projects\CMP102_Project_Final - URG\Restaurant\CMUgraphicsLib\CMUgraphics.cpp(1171,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\projects\CMP102_Project_Final - URG\Restaurant\CMUgraphicsLib\CMUgraphics.cpp(1202,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\projects\CMP102_Project_Final - URG\Restaurant\CMUgraphicsLib\CMUgraphics.cpp(1210,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\projects\CMP102_Project_Final - URG\Restaurant\CMUgraphicsLib\CMUgraphics.cpp(1357,23): warning C4018: '>': signed/unsigned mismatch
+  colors.cpp
+  image.cpp
+E:\projects\CMP102_Project_Final - URG\Restaurant\CMUgraphicsLib\image.cpp(115,29): warning C4018: '<': signed/unsigned mismatch
+  keyqueue.cpp
+  mousequeue.cpp
+  windowinput.cpp
+  Demo_Main.cpp
+E:\projects\CMP102_Project_Final - URG\Restaurant\Generic_DS\Node.h(35): warning C5037: 'Node<T>::Node': an out-of-line definition of a member of a class template cannot have default arguments
+E:\projects\CMP102_Project_Final - URG\Restaurant\Generic_DS\Node.h(47): warning C5037: 'Node<T>::setNext': an out-of-line definition of a member of a class template cannot have default arguments
+E:\projects\CMP102_Project_Final - URG\Restaurant\MaxHEAP.h(188,2): warning C4018: '<': signed/unsigned mismatch
+E:\projects\CMP102_Project_Final - URG\Restaurant\MaxHEAP.h(336,2): warning C4018: '<': signed/unsigned mismatch
+E:\projects\CMP102_Project_Final - URG\Restaurant\MaxHEAP.h(345,2): warning C4018: '<': signed/unsigned mismatch
+  CancelEvent.cpp
+E:\projects\CMP102_Project_Final - URG\Restaurant\Generic_DS\Node.h(35): warning C5037: 'Node<T>::Node': an out-of-line definition of a member of a class template cannot have default arguments
+E:\projects\CMP102_Project_Final - URG\Restaurant\Generic_DS\Node.h(47): warning C5037: 'Node<T>::setNext': an out-of-line definition of a member of a class template cannot have default arguments
+E:\projects\CMP102_Project_Final - URG\Restaurant\MaxHEAP.h(188,2): warning C4018: '<': signed/unsigned mismatch
+E:\projects\CMP102_Project_Final - URG\Restaurant\MaxHEAP.h(336,2): warning C4018: '<': signed/unsigned mismatch
+E:\projects\CMP102_Project_Final - URG\Restaurant\MaxHEAP.h(345,2): warning C4018: '<': signed/unsigned mismatch
+  Event.cpp
+E:\projects\CMP102_Project_Final - URG\Restaurant\Generic_DS\Node.h(35): warning C5037: 'Node<T>::Node': an out-of-line definition of a member of a class template cannot have default arguments
+E:\projects\CMP102_Project_Final - URG\Restaurant\Generic_DS\Node.h(47): warning C5037: 'Node<T>::setNext': an out-of-line definition of a member of a class template cannot have default arguments
+E:\projects\CMP102_Project_Final - URG\Restaurant\MaxHEAP.h(188,2): warning C4018: '<': signed/unsigned mismatch
+E:\projects\CMP102_Project_Final - URG\Restaurant\MaxHEAP.h(336,2): warning C4018: '<': signed/unsigned mismatch
+E:\projects\CMP102_Project_Final - URG\Restaurant\MaxHEAP.h(345,2): warning C4018: '<': signed/unsigned mismatch
+  ArrivalEvent.cpp
+E:\projects\CMP102_Project_Final - URG\Restaurant\Generic_DS\Node.h(35): warning C5037: 'Node<T>::Node': an out-of-line definition of a member of a class template cannot have default arguments
+E:\projects\CMP102_Project_Final - URG\Restaurant\Generic_DS\Node.h(47): warning C5037: 'Node<T>::setNext': an out-of-line definition of a member of a class template cannot have default arguments
+E:\projects\CMP102_Project_Final - URG\Restaurant\MaxHEAP.h(188,2): warning C4018: '<': signed/unsigned mismatch
+E:\projects\CMP102_Project_Final - URG\Restaurant\MaxHEAP.h(336,2): warning C4018: '<': signed/unsigned mismatch
+E:\projects\CMP102_Project_Final - URG\Restaurant\MaxHEAP.h(345,2): warning C4018: '<': signed/unsigned mismatch
+  PromoteEvent.cpp
+E:\projects\CMP102_Project_Final - URG\Restaurant\Generic_DS\Node.h(35): warning C5037: 'Node<T>::Node': an out-of-line definition of a member of a class template cannot have default arguments
+E:\projects\CMP102_Project_Final - URG\Restaurant\Generic_DS\Node.h(47): warning C5037: 'Node<T>::setNext': an out-of-line definition of a member of a class template cannot have default arguments
+E:\projects\CMP102_Project_Final - URG\Restaurant\MaxHEAP.h(188,2): warning C4018: '<': signed/unsigned mismatch
+E:\projects\CMP102_Project_Final - URG\Restaurant\MaxHEAP.h(336,2): warning C4018: '<': signed/unsigned mismatch
+E:\projects\CMP102_Project_Final - URG\Restaurant\MaxHEAP.h(345,2): warning C4018: '<': signed/unsigned mismatch
+  GUI.cpp
+E:\projects\CMP102_Project_Final - URG\Restaurant\Generic_DS\Node.h(35): warning C5037: 'Node<T>::Node': an out-of-line definition of a member of a class template cannot have default arguments
+E:\projects\CMP102_Project_Final - URG\Restaurant\Generic_DS\Node.h(47): warning C5037: 'Node<T>::setNext': an out-of-line definition of a member of a class template cannot have default arguments
+E:\projects\CMP102_Project_Final - URG\Restaurant\GUI\GUI.cpp(73,23): warning C4018: '<': signed/unsigned mismatch
+  Cook.cpp
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Cook.cpp(140,22): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  Order.cpp
+  Restaurant.cpp
+E:\projects\CMP102_Project_Final - URG\Restaurant\Generic_DS\Node.h(35): warning C5037: 'Node<T>::Node': an out-of-line definition of a member of a class template cannot have default arguments
+E:\projects\CMP102_Project_Final - URG\Restaurant\Generic_DS\Node.h(47): warning C5037: 'Node<T>::setNext': an out-of-line definition of a member of a class template cannot have default arguments
+E:\projects\CMP102_Project_Final - URG\Restaurant\MaxHEAP.h(188,2): warning C4018: '<': signed/unsigned mismatch
+E:\projects\CMP102_Project_Final - URG\Restaurant\MaxHEAP.h(336,2): warning C4018: '<': signed/unsigned mismatch
+E:\projects\CMP102_Project_Final - URG\Restaurant\MaxHEAP.h(345,2): warning C4018: '<': signed/unsigned mismatch
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(189,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(191,23): warning C4018: '<': signed/unsigned mismatch
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(201,33): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(208,23): warning C4018: '<': signed/unsigned mismatch
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(218,33): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(224,23): warning C4018: '<': signed/unsigned mismatch
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(234,33): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(325,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(379,3): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(721,19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(722,19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(723,19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(732,4): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(735,74): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(755,4): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(758,74): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(776,4): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(779,74): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(798,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(841,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(844,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(845,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(846,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(861,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(864,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(865,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(866,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(879,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(882,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(883,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(884,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(902,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(905,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(906,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(907,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(924,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(927,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(928,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(929,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(942,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(945,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(946,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(947,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1188,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1230,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1234,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1235,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1236,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1254,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1257,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1258,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1259,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1272,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1276,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1277,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1278,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1296,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1299,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1300,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1301,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1318,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1321,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1322,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1323,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1336,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1339,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1340,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1341,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1483,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1526,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1529,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1530,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1531,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1546,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1549,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1550,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1551,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1564,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1567,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1568,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1569,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1587,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1590,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1591,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1592,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1609,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1612,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1613,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1614,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1627,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1630,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1631,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1632,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1776,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1818,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1821,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1822,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1823,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1838,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1841,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1842,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1843,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1856,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1859,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1860,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1861,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1879,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1882,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1883,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1884,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1901,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1904,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1905,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1906,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1919,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1922,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1923,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(1924,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  Generating Code...
+E:\projects\CMP102_Project_Final - URG\Restaurant\Rest\Restaurant.cpp(790): warning C4715: 'Restaurant::HurtCooks': not all control paths return a value
+E:\projects\CMP102_Project_Final - URG\Restaurant\MaxHEAP.h(283): warning C4172: returning address of local variable or temporary: Arr
+E:\projects\CMP102_Project_Final - URG\Restaurant\MaxHEAP.h(290): warning C4172: returning address of local variable or temporary: Arr
+  jpegload.c
+E:\projects\CMP102_Project_Final - URG\Restaurant\CMUgraphicsLib\jpegload.c(23,12): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  jcomapi.c
+  jcparam.c
+  jdapimin.c
+  jdapistd.c
+  jdatasrc.c
+  jdcoefct.c
+  jdcolor.c
+  jddctmgr.c
+  jdhuff.c
+  jdinput.c
+  jdmainct.c
+  jdmarker.c
+  jdmaster.c
+  jdmerge.c
+  jdphuff.c
+  jdpostct.c
+  jdsample.c
+  jdtrans.c
+  jerror.c
+E:\projects\CMP102_Project_Final - URG\Restaurant\CMUgraphicsLib\jpeg\jerror.c(169,5): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\projects\CMP102_Project_Final - URG\Restaurant\CMUgraphicsLib\jpeg\jerror.c(171,5): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  Generating Code...
+  Compiling...
+  jidctflt.c
+  jidctfst.c
+  jidctint.c
+  jidctred.c
+  jmemmgr.c
+E:\projects\CMP102_Project_Final - URG\Restaurant\CMUgraphicsLib\jpeg\jmemmgr.c(1103,19): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\projects\CMP102_Project_Final - URG\Restaurant\CMUgraphicsLib\jpeg\jmemmgr.c(1106,11): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  jmemnobs.c
+  jquant1.c
+  jquant2.c
+  jutils.c
+  Generating Code...
+  Restaurant.vcxproj -> E:\projects\CMP102_Project_Final - URG\Debug\Restaurant.exe

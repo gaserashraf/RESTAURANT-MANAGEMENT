@@ -353,4 +353,9 @@ public:
 		}
 		std::cout << std::endl;
 	}
+
+	Order** GetHeap()
+	{
+		return Heap;
+	}
 };

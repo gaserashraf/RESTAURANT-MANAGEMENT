@@ -6,7 +6,13 @@ CancelEvent::CancelEvent(int eTime, int ordID):Event(eTime,ordID)
 
 void CancelEvent::Execute(Restaurant* pRest)
 {
-	delete pRest->deleteOrderId(OrderID);
+	Node <Order*> * pOrd = pRest->deleteOrderId(OrderID);
+	if (pOrd && pOrd->getItem())
+	{
+		pRest->setnumNormalOrders(pRest->getnumNormalOrders() - 1);
+		pRest->setOriginalNormalOrders(pRest->getOriginalNormalOrders() - 1);
+		delete pOrd;
+	}
 	/*Node<Order*>* prev = pRest->getOrdersListHead();
 	Node<Order*>* curr;
 	

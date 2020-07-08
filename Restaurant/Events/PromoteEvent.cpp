@@ -11,12 +11,16 @@ void PromoteEvent::Execute(Restaurant* pRest)
 	//1-add to Queue VIP
 	//2-Remove from Normal
 	//pRest->addOrderToVip(pRest->deleteOrderId(OrderID)->getItem());
-	Order* ord = pRest->deleteOrderId(OrderID)->getItem();
-	if (ord&&ord->getStatus()==WAIT)
+	Node <Order*>* pOrd = pRest->deleteOrderId(OrderID);
+	if (pOrd && pOrd->getItem() && pOrd->getItem()->getStatus()==WAIT)
 	{
+		Order* ord = pOrd->getItem();
 		ord->SetMoney(ord->GetMoney() + Ex);
 		ord->SetType(TYPE_VIP);
 		pRest->addOrderToVip(ord);
+		pRest->setnumNormalOrders(pRest->getnumNormalOrders() - 1);
+		pRest->setnumVIPOrders(pRest->getnumVIPOrders() + 1);
+		pRest->setOriginalNormalOrders(pRest->getOriginalNormalOrders() - 1);
 	}
 
 	

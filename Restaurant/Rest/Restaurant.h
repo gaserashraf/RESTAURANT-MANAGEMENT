@@ -29,9 +29,12 @@ private:
 	//		    			       \||||||||||||||||/
 	MaxHEAP<Order*> VIP;	/// ->>>|Priority Queue|<<<-
 	//		    			       /||||||||||||||||\ 
-	Queue<Order*> VGN;	//Important: This is just for demo
+	Queue<Order*> VGN;	
 	Queue<Order*> DEMO_Queue;	//Important: This is just for demo
-
+	Queue<Order*> URG;	        //Nosirr 31/5
+ 
+ 	string TextName;
+ 	
 
 
 	Cook* pNormalCook;
@@ -47,14 +50,16 @@ private:
 	LinkedList<Cook*>pBusyVeganCook;
 	LinkedList<Cook*>pBusyVIPCook;
 
-
+	//LinkedList<Cook*>pUrgentCook;
 
 	LinkedList<Order*>FinshOrders;
 
 	LinkedList<Order*>ServeOrders;
+
 	int numServNOrder;
 	int numServGOrder;
 	int numServVOrder;
+
 
 	//Gamal 17/5
 
@@ -75,14 +80,26 @@ private:
 	int minBreakTime[3];	//arrarys for min and max break time for each type
 	int maxBreaktime[3];
 	
-	int injuryProbability;
-	int restPeriod;
+	/// 29/5 Hos
+	float injuryProbability;
 
-	int VIPtoUrgent;
+	int VIPInj;
+	int VGNInj;
+	int NRMInj;
+
+	int restPeriod;
+	///
+
+	int VIP_WT;
 	
+	int originalNormalOrders = 0;
 	int numNormalOrders = 0;
 	int numVeganOrders = 0;
 	int numVIPOrders = 0;
+	int numURGOrders = 0;
+
+	int AutoPromotions = 0;
+
 
 public:
 	
@@ -109,7 +126,7 @@ public:
 	void addOrderToVip(Order* O);
 	void addOrderToVgn(Order* O);
 
-
+	
 
 	//gaser
 	bool isAvliableNormalCooks();
@@ -121,7 +138,7 @@ public:
 	void addToAvVIPCook(Cook* c);
 	void addToBuNorCook(Cook* c);
 	void addToBuVaCook(Cook* c);
-	void addToVuVIPCook(Cook* c);
+	void addToBuVIPCook(Cook* c);
 
 	Node<Cook*>*RemoveAndGetCookByIdFromANC(int id);
 	Node<Cook*>*RemoveAndGetCookByIdFromAGC(int id);
@@ -157,7 +174,27 @@ public:
 /// ================================================================================================== 
 
 
+	//Hos 31/5
+	int getnumNormalOrders();
+	int getnumVeganOrders();
+	int getnumVIPOrders();
+	int getnumURGOrders();
 
+	void setnumNormalOrders(int);
+	void setnumVeganOrders(int);
+	void setnumVIPOrders(int);
+	void setnumURGOrders(int);
+
+	bool HurtCooks(Node<Cook*>*, Node<Cook*>*, Node<Cook*>*, int);
+
+	//Gamal 31/5
+	void setOriginalNormalOrders(int n);
+	int getOriginalNormalOrders();
+	int getFinishedNormNum();
+	int getFinishedVGNNum();
+	int getFinishedVIPNum();
+	void sortFinishedOrders(LinkedList<Order*>& FinishOrders);	//according to serving time
+	void simulation(PROG_MODE);
 };
 
 #endif

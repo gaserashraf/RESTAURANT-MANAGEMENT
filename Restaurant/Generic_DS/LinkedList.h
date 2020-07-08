@@ -275,6 +275,7 @@ public:
 	//template<>
 	Node<Order*>* DeleteNodeId(int id)
 	{
+		if (isEmpty()) return nullptr;
 		if (id == Head->getItem()->GetID())
 			return Deletefirst();
 		else if (id == tail->getItem()->GetID())
@@ -303,6 +304,7 @@ public:
 	//template<>
 	Node<Cook*>* RemoveCookFromListWithOutDelete(int id)
 	{
+		if (isEmpty()) return nullptr;
 		if (id == Head->getItem()->GetID())
 			return Deletefirst();
 		else if (id == tail->getItem()->GetID())

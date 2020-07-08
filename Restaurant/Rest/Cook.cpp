@@ -4,7 +4,10 @@ Cook::Cook(ORD_TYPE t, int s)
 {
 	ID++;
 	type = t;
-	speed = s;
+
+	/// Hos29/5
+	setSpeed(s);
+	injured = false;
 }
 
 Cook::Cook()
@@ -13,17 +16,38 @@ Cook::Cook()
 	timeBackToAvaList = 0;
 	orderThatWorkedAt = nullptr;
 	TimeFinshOrder = 0;
+	injured = false;
 }
 
 void Cook::setSpeed(int s)
 {
 	speed = s;
+
+	/// Hos29/5
+	setInjSpeed();
 }
 
 int Cook::getSpeed()
 {
 	return speed;
 }
+
+/// Hos29/5
+void Cook::setInj(bool i)
+{
+	injured = i;
+}
+
+bool Cook::isInj()
+{
+	return injured;
+}
+
+int Cook::getInjSpeed()
+{
+	return injSpeed;
+}
+
 
 void Cook::setBreakTime(int b)
 {

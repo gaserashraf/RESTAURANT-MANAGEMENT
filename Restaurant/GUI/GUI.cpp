@@ -294,6 +294,8 @@ PROG_MODE	GUI::getGUIMode() const
 		Mode = (PROG_MODE) (atoi(S.c_str())-1);
 	}
 	while(Mode< 0 || Mode >= MODE_CNT);
+
+	PrintMessage("Enter File Name of Input (including .txt)");
 	
 	return Mode;
 }
